@@ -10,14 +10,18 @@ public class Member{
     @Column(name="id")
     private Long memberId;
 
+    @Column(name="account")
+    private String memberAccount;
+
     @Column(name="password")
-    private String meberPassword;
+    private String memberPassword;
 
     @Column(name="name")
     private String memberName;
 
-    @ManyToOne
-    Team team;
+//    @ManyToOne
+//    private Team team;
+
 
     public Long getMemberId() {
         return memberId;
@@ -27,12 +31,20 @@ public class Member{
         this.memberId = memberId;
     }
 
-    public String getMeberPassword() {
-        return meberPassword;
+    public String getMemberAccount() {
+        return memberAccount;
     }
 
-    public void setMeberPassword(String meberPassword) {
-        this.meberPassword = meberPassword;
+    public void setMemberAccount(String memberAccount) {
+        this.memberAccount = memberAccount;
+    }
+
+    public String getMemberPassword() {
+        return memberPassword;
+    }
+
+    public void setMemberPassword(String memberPassword) {
+        this.memberPassword = memberPassword;
     }
 
     public String getMemberName() {
@@ -41,13 +53,5 @@ public class Member{
 
     public void setMemberName(String memberName) {
         this.memberName = memberName;
-    }
-
-    public Team getTeam() {
-        return team;
-    }
-
-    public void setTeam(Team team) {
-        this.team = team;
     }
 }

@@ -11,8 +11,9 @@ public class MemberService {
     @Autowired
     private MemberRepository memberRepository;
 
-//    public void save(Member member){
-//        memberRepository.save(member);
+    public void save(Member member) {
+        memberRepository.save(member);
 
     }
+}
 

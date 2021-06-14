@@ -16,6 +16,7 @@ public class Team {
     @Column(name="name")
     private String teamName;
 
+
     public Long getTeamId() {
         return teamId;
     }
