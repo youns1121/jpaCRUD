@@ -1,11 +1,12 @@
 package com.jpacrud.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
+
+@Table(name="team")
 public class Team {
     @Id
     @GeneratedValue
@@ -16,6 +17,20 @@ public class Team {
     @Column(name="name")
     private String teamName;
 
+    @Column(name="address")
+    private String teamAddress;
+
+    @OneToMany(mappedBy = "team")
+    private List<Member> members = new ArrayList<>();
+
+    public List<Member> getMembers() {
+        return members;
+    }
+
+
+    public void setMembers(List<Member> members) {
+        this.members = members;
+    }
 
     public Long getTeamId() {
         return teamId;
@@ -31,5 +46,13 @@ public class Team {
 
     public void setTeamName(String teamName) {
         this.teamName = teamName;
+    }
+
+    public String getTeamAddress() {
+        return teamAddress;
+    }
+
+    public void setTeamAddress(String teamAddress) {
+        this.teamAddress = teamAddress;
     }
 }
