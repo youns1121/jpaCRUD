@@ -1,5 +1,7 @@
 package com.jpacrud.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 
 @Entity
@@ -20,6 +22,7 @@ public class Member{
     private String memberName;
 
     @ManyToOne
+    @JsonManagedReference // 순환참조 방지
     @JoinColumn(name="team_id")
     private Team team;
 

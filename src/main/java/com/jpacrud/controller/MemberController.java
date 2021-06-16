@@ -1,11 +1,17 @@
 package com.jpacrud.controller;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.jpacrud.domain.Member;
+import com.jpacrud.domain.Team;
+import com.jpacrud.dto.MemberDto;
 import com.jpacrud.repository.MemberRepository;
+import com.jpacrud.repository.TeamRepository;
+import com.jpacrud.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -17,24 +23,31 @@ public class MemberController {
     MemberRepository memberRepository;
 
 
-    @PostMapping("/create") // 생성, CREATE
+
+    @JsonIgnore
+    @PostMapping("/create") // 멤버 생성, CREATE
     public String create(@RequestBody Member member) {
 
-        Member memberSave = memberRepository.save(member);
+        memberRepository.save(member);
 
         return member.getMemberName() + "님 회원가입을 축하드립니다~!";
     }
 
-    public String findMember() {
-        return null;
-    }
 
-    @GetMapping("/read") //조회, READ
+
+
+
+
+    @GetMapping("/read") //조회, READ, Member
     public Member read(@RequestParam Long memberId) {
         Optional<Member> member = memberRepository.findById(memberId);
 
         return member.get();
     }
+
+
+
+
 
 
     @PutMapping("/update") //변경, UPDATE
@@ -47,7 +60,6 @@ public class MemberController {
             selectMember.setMemberName(member.getMemberName());
             selectMember.setMemberAccount(member.getMemberAccount());
             selectMember.setMemberPassword(member.getMemberPassword());
-
 
             memberRepository.save(selectMember);
         });

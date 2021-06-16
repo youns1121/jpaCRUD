@@ -1,5 +1,7 @@
 package com.jpacrud.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,12 +23,15 @@ public class Team {
     private String teamAddress;
 
     @OneToMany(mappedBy = "team")
+    @JsonBackReference //순환참조 방지
     private List<Member> members = new ArrayList<>();
+
+
+
 
     public List<Member> getMembers() {
         return members;
     }
-
 
     public void setMembers(List<Member> members) {
         this.members = members;

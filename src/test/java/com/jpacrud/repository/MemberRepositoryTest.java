@@ -42,7 +42,6 @@ class MemberRepositoryTest {
         member.setMemberPassword("121111");
         member.setMemberName("min");
         member.setTeam(team);
-
         memberRepository.save(member);
     }
 
@@ -54,7 +53,7 @@ class MemberRepositoryTest {
         Optional<Team> readTeam = teamRepository.findById(1L);
 
 
-        readMember.ifPresent(selectMember ->{
+        readMember.ifPresent(selectMember ->{ // 멤버 조회
 
             System.out.println(selectMember.getMemberAccount());
             System.out.println(selectMember.getMemberName());
@@ -62,54 +61,56 @@ class MemberRepositoryTest {
             System.out.println(selectMember.getTeam());
         });
 
-
-        readTeam.ifPresent(selectTeam ->{
+        readTeam.ifPresent(selectTeam ->{ // 팀 조회
 
             System.out.println(selectTeam.getTeamName());
             System.out.println(selectTeam.getTeamAddress());
             System.out.println(selectTeam.getMembers());
+
+
         });
 
     }
 
-    @Test
-    @Transactional
-    public void teamRead(){ //조회
-        Optional<Team> readTeam = teamRepository.findById(1L);
 
-        readTeam.ifPresent(selectTeam ->{
-            System.out.println(selectTeam.getMembers());
-            System.out.println(selectTeam.getTeamName());
-            System.out.println(selectTeam.getTeamAddress());
-        });
 
-    }
 
 
     @Test
     public void update(){ // 수정
         Optional<Member> member = memberRepository.findById(1L);
+        Optional<Team> team = teamRepository.findById(1L);
 
         member.ifPresent(selectMember->{
 
-            selectMember.setMemberPassword("1q2w3e4r");
-            selectMember.setMemberAccount("test999");
-            selectMember.setMemberName("민연식");
+            selectMember.setMemberPassword("수정된패스워드");
+            selectMember.setMemberAccount("수정된계정");
+            selectMember.setMemberName("수정된이름");
 
             memberRepository.save(selectMember);
-
         });
+
+        team.ifPresent(selectTeam-> {
+            selectTeam.setTeamName("수정팀");
+            selectTeam.setTeamAddress("수정된주소");
+
+            teamRepository.save(selectTeam);
+        });
+
     }
 
 
     @Test
-    public void delete(){
-        Optional<Member> member = memberRepository.findById(2L);
-
+    public void delete(){ // 삭제
+        Optional<Member> member = memberRepository.findById(3L);
+        Optional<Team> team  = teamRepository.findById(2L);
 
         member.ifPresent(selectMember ->{
             memberRepository.delete(selectMember);
+        });
 
+        team.ifPresent(selectTeam ->{
+            teamRepository.delete(selectTeam);
         });
 
 
