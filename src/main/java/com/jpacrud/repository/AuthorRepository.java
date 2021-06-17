@@ -1,10 +1,12 @@
 package com.jpacrud.repository;
 
-import com.jpacrud.domain.Team;
+import com.jpacrud.domain.Author;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+
 @Repository
-public interface TeamRepository extends JpaRepository<Team, Long> {
+public interface AuthorRepository extends JpaRepository<Author, Long> {
+
 
 }
