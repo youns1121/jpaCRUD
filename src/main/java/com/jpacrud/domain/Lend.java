@@ -1,5 +1,6 @@
 package com.jpacrud.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,7 +22,7 @@ public class Lend {
     private String lendName;
 
 
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     @Column(name = "lend_status")
     private LendStatus status;
 
@@ -29,7 +30,8 @@ public class Lend {
     @JoinColumn(name = "member_id")
     private Member member;
 
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="book_id")
     private Book book;
 

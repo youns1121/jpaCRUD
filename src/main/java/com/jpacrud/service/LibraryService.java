@@ -55,15 +55,10 @@ public class LibraryService {
 
     public Book createBook(BookCreateRequestDto bookCreateRequestDto) { //책 생성
         Optional<Author> author = authorRepository.findById(bookCreateRequestDto.getAuthorId());
-        if (!author.isPresent()) {
-            throw new EntityNotFoundException(
-                    "Author Not Found");
-        }
-
-        Book bookToCreate = new Book();
-        BeanUtils.copyProperties(bookToCreate, bookToCreate);
-        bookToCreate.setAuthor(author.get());
-        return bookRepository.save(bookToCreate);
+        Book book = new Book();
+        BeanUtils.copyProperties(bookCreateRequestDto, book);
+        book.setAuthor(author.get());
+        return bookRepository.save(book);
     }
 
     public void deleteBook(Long id){ // 책 삭제
@@ -100,15 +95,14 @@ public class LibraryService {
     public List<String> lendABook (List<BookLendRequestDto> list) {
         List<String> booksApprovedToBurrow = new ArrayList<>();
         list.forEach(bookLendRequestDto -> {
-            Optional<Book> bookForId =
-                    bookRepository.findById(bookLendRequestDto.getMemberId());
-            if (!bookForId.isPresent()) {
-                throw new EntityNotFoundException(
-                        "Cant find any book under given ID");
-            }
+            Optional<Book> bookForId = bookRepository.findById(bookLendRequestDto.getBookIds());
+//            if (!bookForId.isPresent()) {
+//                throw new EntityNotFoundException(
+//                        "Cant find any book under given ID");
+//            }
 
             Optional<Member> memberForId =
-                    memberRepository.findById(bookLendRequestDto.getMemberId());
+                        memberRepository.findById(bookLendRequestDto.getMemberId());
             if (!memberForId.isPresent()) {
                 throw new EntityNotFoundException(
                         "Member not present in the database");

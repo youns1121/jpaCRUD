@@ -1,24 +1,39 @@
 package com.jpacrud.repository;
 
 
+import com.jpacrud.domain.Member;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 
-@SpringBootTest //Junit 에 필요한 어노테이션
-@WebAppConfiguration
+@ExtendWith(SpringExtension.class)
+@DataJpaTest
 class MemberRepositoryTest {
 
     @Autowired
-    MemberRepository memberRepository;
+    private MemberRepository memberRepository;
+
+
+    @Test
+    public void 회원생성() throws Exception{
+        //given
+        String memberName = "연식";
+
+
+    }
 
 
 
-    /**
-     * JPA_CRUD_V2 : @ManyToOne,
-     */
+
+
+}
+
 
 
 
@@ -77,7 +92,7 @@ class MemberRepositoryTest {
 //
 //    }
 //
-//
+
 //    @Test
 //    public void delete(){ // 삭제
 //        Optional<Member> member = memberRepository.findById(3L);
@@ -94,4 +109,4 @@ class MemberRepositoryTest {
 //
 //    }
 
-}
+//}

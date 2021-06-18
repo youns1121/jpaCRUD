@@ -22,7 +22,6 @@ public class LibraryController {
 
     private final LibraryService libraryService;
 
-
     /**
      * *주의! 실제 서비스를 개발할때는 Repository에서 반환하는 ResponseEntity를 응답값으로 반환하면 안됩니다.
      * RepositoryEntity 스팩이 변경되면 API의 응답값이 변경되기 때문입니다.
@@ -32,7 +31,7 @@ public class LibraryController {
      * @return
      */
 
-    @GetMapping("/book")
+    @GetMapping("/book") // 전체 책 조회
     public ResponseEntity readBooks(@RequestParam(required = false) String bookIsbn) {
         if (bookIsbn == null) {
             return ResponseEntity.ok(libraryService.readBooks());
@@ -40,8 +39,7 @@ public class LibraryController {
         return ResponseEntity.ok(libraryService.readBook(bookIsbn));
     }
 
-
-    @GetMapping("/book/{bookId}") // 책 조회
+    @GetMapping("/book/{bookId}") // id 책 조회
     public ResponseEntity<Book> readBook(@PathVariable Long bookId) {
         return ResponseEntity.ok(libraryService.readBook(bookId));
     }
@@ -63,7 +61,7 @@ public class LibraryController {
         return ResponseEntity.ok(libraryService.createMember(memberCreateRequestDto));
     }
 
-    @PatchMapping("/member/{memberId}") //
+    @PatchMapping("/member/{memberId}") // 회원 변경
     public ResponseEntity<Member> updateMember (@RequestBody MemberCreateRequestDto memberCreateRequestDto,
                 @PathVariable Long memberId) {
         return ResponseEntity.ok(libraryService.updateMember(memberId, memberCreateRequestDto));

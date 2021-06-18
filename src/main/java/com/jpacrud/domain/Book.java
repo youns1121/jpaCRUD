@@ -13,6 +13,7 @@ import java.util.List;
 @Entity
 @Table(name = "book")
 public class Book {
+
     @Id
     @GeneratedValue
     @Column(name = "book_id")
@@ -29,6 +30,5 @@ public class Book {
     private Author author;
 
     @OneToMany(mappedBy = "book")
-    private List<Lend> lends;
-
+    private List<Lend> lends = new ArrayList<>();
 }

@@ -23,8 +23,6 @@ public class Author {
     @Column(name = "author_name")
     private String authorName;
 
-
-
     @JsonBackReference
     @OneToMany(mappedBy = "author")
     private List<Book> books = new ArrayList<>();

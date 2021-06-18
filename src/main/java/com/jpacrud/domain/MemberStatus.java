@@ -1,5 +1,14 @@
 package com.jpacrud.domain;
 
-public enum MemberStatus {
-    ACTIVE, DEACTIVATED // 활성화 , 비활성화
+public enum MemberStatus { //계정 활성 여부
+    ACTIVE("avtive"), //활성화
+    DEACTIVATED("deactivated"); //비활성화
+
+    private String value;
+
+    MemberStatus(String value) {
+        this.value = value;
+
+
+    }
 }

@@ -2,8 +2,11 @@ package com.jpacrud.domain;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -21,8 +24,11 @@ public class Member {
 
     @Enumerated(EnumType.STRING)
     @Column(name="member_status")
-    private MemberStatus status;
+    private MemberStatus status; // 계정 활성화 여부
 
+
+    @OneToMany(mappedBy = "member")
+    private List<Lend> lends = new ArrayList<>();
 
 
 
