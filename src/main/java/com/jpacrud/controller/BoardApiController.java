@@ -25,7 +25,6 @@ public class BoardApiController{
     @Transactional
     @PostMapping("/create")// 게시판 생성 , 아이디를 반환
     public  Long createPosts (@RequestBody PostsRequestDto postsRequestDto) {
-
         return boardService.createPosts(postsRequestDto);
     }
 
@@ -39,10 +38,9 @@ public class BoardApiController{
         return boardService.updatePosts(postsId, postsUpdateRequestDto);
     }
 
-    @DeleteMapping("/delete/{postsId}") // 게시판 삭제
+    @DeleteMapping("/delete/{postsId}") // 아이디로 게시판 삭제
     public void deletePosts (@PathVariable Long postsId){
-
-
+        boardService.deletePosts(postsId);
     }
 
 

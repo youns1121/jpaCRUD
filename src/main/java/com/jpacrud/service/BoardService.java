@@ -73,69 +73,14 @@ public class BoardService {
     /**
      * 삭제하기
      */
-//    public Long deletePosts(Long postsId) {
-//
-//        return postRepository.deleteById();
-//    }
+    public void deletePosts(Long postsId) { // 게시글 삭제하기
+        postRepository.deleteById(postsId);
 
-
-
+    }
 }
 
-//    @Transactional
-//    public Long createBoard(BoardDto boardDto) { // 게시글 생성
-//
-//        return boardRepository.save(boardDto.toEntity()).getId();
-//    }
-//
-//    public List<BoardDto> boardList() { // 게시글 리스트 보여주기
-//        List<Board> boardList = boardRepository.findAll();
-//        List<BoardDto> boardDtoList = new ArrayList<>();
-//        for (Board board : boardList) {
-//            BoardDto boardDto = BoardDto.builder()
-//                    .id(board.getId())
-//                    .title(board.getTitle())
-//                    .content(board.getContent())
-//                    .count(board.getCount())
-//                    .build();
-//
-//            boardDtoList.add(boardDto);
-//        }
-//
-//        return boardDtoList;
 
 
-
-
-
-
-
-
-//    public Page<Board> listBoard(Pageable pageable){
-//
-//        return boardRepository.findAll(pageable);
-//    }
-//
-//    public Board viewBoard(long id){
-//        return boardRepository.findById(id)
-//                .orElseThrow(()->{
-//                    return new IllegalArgumentException("아이디를 찾을 수 없습니다");
-//        });
-//    }
-//
-//    public void deleteBoard(long id){
-//        boardRepository.deleteById(id);
-//    }
-//
-//    public Board changeBoard(long id, Board requestBoard){
-//
-//        boardRepository.findById(id)
-//                .orElseThrow(()->{
-//                    return new IllegalArgumentException("아이디를 찾을 수 없습니다.");
-//                });
-//        Board board = Board.builder()
-//                .title()
-//                .build()
 
 
 
