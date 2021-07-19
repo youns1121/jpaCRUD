@@ -1,21 +1,15 @@
 package com.jpacrud.controller;
 
-import com.jpacrud.domain.Posts;
-import com.jpacrud.dto.PostsRequestDto;
+import com.jpacrud.dto.PostDto;
 import com.jpacrud.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 
 @RestController
@@ -36,9 +30,8 @@ class BoardApiControllerTest {
         String title = "제목";
         String author = "글쓴이";
         String content = "내용";
-        PostsRequestDto postsRequestDto = PostsRequestDto.builder()
+        PostDto postsRequestDto = PostDto.builder()
                 .title(title)
-                .author(author)
                 .content(content)
                 .build();
 

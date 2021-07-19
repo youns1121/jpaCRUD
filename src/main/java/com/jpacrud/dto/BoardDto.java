@@ -6,7 +6,8 @@ import lombok.*;
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString
+@AllArgsConstructor
+@Builder
 public class BoardDto {
 
     private Long boardId;
@@ -15,10 +16,10 @@ public class BoardDto {
 
 
 
+//    public BoardDto toEntity(BoardMgmtDto boardMgmtDto){
+//        return BoardDto.builder()
+//                .name(boardMgmtDto.getBoardDto().getName())
+//                .build();
 
-    public BoardDto(Long boardId, String name) {
-        this.boardId = boardId;
-        this.name = name;
 
-    }
 }
