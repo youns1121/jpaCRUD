@@ -1,11 +1,21 @@
 package com.jpacrud.service;
 
+import com.jpacrud.domain.Board;
 import com.jpacrud.dto.BoardDto;
-import com.jpacrud.dto.BoardMgmtDto;
+import com.jpacrud.repository.BoardRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
-public interface BoardService {
+@RequiredArgsConstructor
+@Service
+public class BoardService {
 
-    Long createBoard(BoardMgmtDto boardMgmtDto);
+    private final BoardRepository boardRepository;
 
-    Long createPosts(BoardMgmtDto boardMgmtDto);
+
+    public Long createBoard(BoardDto boardDto){
+
+        return boardRepository.save(Board.createBoard(boardDto)).getBoardId();
+    }
+
 }

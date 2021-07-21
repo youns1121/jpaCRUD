@@ -1,7 +1,6 @@
 package com.jpacrud.domain;
 
 import com.jpacrud.domain.common.CommonDateEntity;
-import com.jpacrud.dto.BoardMgmtDto;
 import com.jpacrud.dto.PostDto;
 import lombok.*;
 
@@ -12,7 +11,7 @@ import javax.persistence.*;
 @Builder
 @Getter
 @Entity
-public class Posts extends CommonDateEntity {
+public class BoardPost extends CommonDateEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "post_id")
@@ -33,20 +32,15 @@ public class Posts extends CommonDateEntity {
 
 
 
-    public static Posts create(BoardMgmtDto boardMgmtDto){
-       return Posts.builder()
-               .title(boardMgmtDto.getPostDto().getTitle())
-               .content(boardMgmtDto.getPostDto().getContent())
+    public static BoardPost createPosts(PostDto postDto){
+       return BoardPost.builder()
+               .title(postDto.getTitle())
+               .content(postDto.getContent())
                .build();
-
-
     }
 
-    public Posts setUpdate(String title, String content) {
-        this.title = title;
-        this.content = content;
-        return this;
-    }
+
+
 
 
 }

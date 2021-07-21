@@ -2,11 +2,9 @@ package com.jpacrud.domain;
 
 import com.jpacrud.dto.BoardDto;
 import com.jpacrud.dto.BoardMgmtDto;
-import com.sun.istack.NotNull;
 import lombok.*;
 
 import javax.persistence.*;
-import javax.swing.plaf.basic.BasicButtonUI;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,47 +22,23 @@ public class Board { //게시판
     private Long boardId;
 
     @Column(name = "board_name")
-    private String name;
+    private String boardName;
 
     @OneToMany(mappedBy = "board")
-    private List<Posts> postsList = new ArrayList<>();
+    private List<BoardPost> postsList = new ArrayList<>();
 
 
-    public static Board choiceBoard(BoardMgmtDto boardMgmtDto){
+
+    private void create(BoardDto boardDto){
+        this.boardName = boardDto.getBoardName();
+    }
+
+
+    public static Board createBoard(BoardDto boardDto){
         return Board.builder()
-                .boardId(boardMgmtDto.getBoardDto().getBoardId())
+                .boardName(boardDto.getBoardName())
                 .build();
     }
-
-    //게시판 생성 로직
-    private static Board create(BoardDto boardDto){
-        return Board.builder()
-                .name(boardDto.getName())
-                .build();
-    }
-
-    /**
-     * 게시판 생성 : ex 자유게시판
-     */
-    public static Board createBoard(BoardMgmtDto boardMgmtDto){
-        Board board = create(boardMgmtDto.getBoardDto());
-
-        return board;
-    }
-
-    /**
-     * 게시물 생성 : ex 자유게시판 - 글 작성
-     */
-
-    public static Board createPosts(BoardMgmtDto boardMgmtDto){
-        Board board = choiceBoard(boardMgmtDto);
-        board.postsList = (List<Posts>) Posts.create(boardMgmtDto);
-        return board;
-
-
-
-    }
-
 
 
 

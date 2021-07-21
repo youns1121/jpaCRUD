@@ -1,8 +1,6 @@
 package com.jpacrud.dto;
 
-import com.jpacrud.domain.Posts;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 

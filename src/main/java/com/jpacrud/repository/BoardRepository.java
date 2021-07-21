@@ -10,7 +10,7 @@ import javax.persistence.EntityManager;
 @Repository
 public interface BoardRepository extends JpaRepository<Board,Long> {
 
-    Board findByName(String name); // Board 이름으로 조회하기
+//    Board findByName(String name); // Board 이름으로 조회하기
 
 
 }

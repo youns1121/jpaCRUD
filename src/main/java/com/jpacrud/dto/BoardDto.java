@@ -11,15 +11,13 @@ import lombok.*;
 public class BoardDto {
 
     private Long boardId;
-    private String name;
-
-
-
-
-//    public BoardDto toEntity(BoardMgmtDto boardMgmtDto){
-//        return BoardDto.builder()
-//                .name(boardMgmtDto.getBoardDto().getName())
-//                .build();
+    private String boardName;
 
 
 }
+
+
+
+
+
+

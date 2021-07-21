@@ -1,10 +1,6 @@
 package com.jpacrud.dto;
 
-import com.jpacrud.domain.Board;
-import com.jpacrud.domain.Posts;
 import lombok.*;
-
-import java.time.LocalDateTime;
 
 @AllArgsConstructor
 @NoArgsConstructor

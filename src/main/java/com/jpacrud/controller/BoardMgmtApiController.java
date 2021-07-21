@@ -1,13 +1,12 @@
 package com.jpacrud.controller;
 
 import com.jpacrud.dto.BoardDto;
-import com.jpacrud.dto.BoardMgmtDto;
+import com.jpacrud.dto.PostDto;
+import com.jpacrud.service.BoardPostService;
 import com.jpacrud.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import javax.transaction.Transactional;
 
 
 @RestController
@@ -16,22 +15,24 @@ import javax.transaction.Transactional;
 public class BoardMgmtApiController {
 
 
+
     private final BoardService boardService;
+    private final BoardPostService postsService;
 
 
 
-    @Transactional
+
     @PostMapping("/createBoard") //게시판 생성
-    public ResponseEntity<Long> createBoard (@RequestBody BoardMgmtDto boardMgmtDto){
+    public ResponseEntity<Long> createBoard (@RequestBody BoardDto boardDto){
 
-        return ResponseEntity.ok(boardService.createBoard(boardMgmtDto));
+        return ResponseEntity.ok(boardService.createBoard(boardDto));
     }
 
-    @Transactional
-    @PostMapping("/createPost") //게시물 생성
-    public ResponseEntity<Long> createPost (@RequestBody BoardMgmtDto boardMgmtDto){
 
-        return ResponseEntity.ok(boardService.createPosts(boardMgmtDto));
+    @PostMapping("/createPost") //게시물 생성
+    public ResponseEntity<Long> createPost (@RequestBody PostDto postDto){
+
+        return ResponseEntity.ok(postsService.createPosts(postDto));
     }
 
 //    @GetMapping("/read/{id}") //게시판 조회, 아이디로 조회
