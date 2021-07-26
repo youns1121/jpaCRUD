@@ -13,6 +13,11 @@ public class BoardService {
     private final BoardRepository boardRepository;
 
 
+    /**
+     * 게시판 생성
+     * @param boardDto
+     * @return
+     */
     public Long createBoard(BoardDto boardDto){
 
         return boardRepository.save(Board.createBoard(boardDto)).getBoardId();

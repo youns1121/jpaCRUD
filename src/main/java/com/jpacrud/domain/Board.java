@@ -24,7 +24,7 @@ public class Board { //게시판
     @Column(name = "board_name")
     private String boardName;
 
-    @OneToMany(mappedBy = "board")
+    @OneToMany(mappedBy = "board", cascade = CascadeType.ALL)
     private List<BoardPost> postsList = new ArrayList<>();
 
 
@@ -34,11 +34,20 @@ public class Board { //게시판
     }
 
 
+    /**
+     * 게시판 생성
+     * @param boardDto
+     * @return
+     */
     public static Board createBoard(BoardDto boardDto){
         return Board.builder()
                 .boardName(boardDto.getBoardName())
                 .build();
     }
+
+    /**
+     * 게시판 수정
+     */
 
 
 

@@ -1,69 +1,100 @@
 package com.jpacrud.service;
 
+import com.jpacrud.domain.Board;
 import com.jpacrud.domain.BoardPost;
 
+import com.jpacrud.domain.BoardPostReply;
+import com.jpacrud.dto.BoardPostReplyDto;
 import com.jpacrud.dto.PostDto;
+import com.jpacrud.repository.BoardRepository;
+import com.jpacrud.repository.PostReplyRepository;
 import com.jpacrud.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import javax.transaction.Transactional;
 
 @RequiredArgsConstructor
 @Service
 public class BoardPostService {
 
     private final PostRepository postRepository;
+    private final BoardRepository boardRepository;
+    private final PostReplyRepository postReplyRepository;
+
 
 
 
     /**
      * 생성하기
      */
-    public Long createPosts(PostDto postDto) { // 게시판 생성 (아이디 반환)
+    public Long createPosts(PostDto postDto) { // 게시글 생성 (아이디 반환)
 
-        return postRepository.save(BoardPost.createPosts(postDto)).getPostsId();
+        Board board = boardRepository.findById(postDto.getBoardId()).orElse(null);
+
+        postDto.setBoard(board);
+
+        BoardPost boardPost = new BoardPost();
+        boardPost.createPosts(postDto);
+
+        return postRepository.save(boardPost).getPostsId();
+    }
+
+
+    /**
+     * 수정하기
+     */
+
+    @Transactional
+    public Long updatePosts(PostDto postDto) {
+
+        BoardPost boardPost = postRepository.findById(postDto.getPostsId()).orElse(null);
+
+        boardPost.createPosts(postDto);
+
+        return postRepository.save(boardPost).getPostsId();
     }
 
     /**
-     * 조회하기
+     * 삭제하기
      */
-//    @Transactional
-//    public PostsResponseDto findById(Long id) { //특정 게시글 아이디로 조회하여 검색
-//        Posts posts = postRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. id = " + id));
-//
-//        return new PostsResponseDto(posts);
-//    }
+    public void deletePosts(PostDto postDto) { // 게시글 삭제하기
+        postRepository.deleteById(postDto.getPostsId());
+
+    }
+
+    /**
+     * 댓글 작성하기
+     * @return
+     */
+
+    public BoardPostReply createReply(BoardPostReplyDto replyDto){
 
 
-    public Optional<BoardPost> getPost(long postId) { // 게시물id로 게시물 단건 조회
+        BoardPost boardPost = postRepository.findById(replyDto.getPostsId()).orElse(null);
+        replyDto.setBoardPost(boardPost);
 
-        return postRepository.findById(postId);
+        BoardPostReply boardPostReply = new BoardPostReply();
+        boardPostReply.create(replyDto);
+
+        return postReplyRepository.save(boardPostReply);
+
+
+
     }
 
 
+
+//    public Optional<BoardPost> getPost(long postId) { // 게시물id로 게시물 단건 조회
 //
-//    /**
-//     * 수정하기
-//     */
-//
-//    @Transactional
-//    public Long updatePosts(Long id, PostsUpdateRequestDto postsUpdateRequestDto) {
-//
-//        Posts posts = postRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. id = " + id));
-//
-//        posts.setUpdate(postsUpdateRequestDto.getTitle(), postsUpdateRequestDto.getContent());
-//
-//        return id;
+//        return postRepository.findById(postId);
 //    }
+
+
 //
-//    /**
-//     * 삭제하기
-//     */
-//    public void deletePosts(Long postsId) { // 게시글 삭제하기
-//        postRepository.deleteById(postsId);
-//
-//    }
+
+
+
 
 
 }

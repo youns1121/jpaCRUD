@@ -1,6 +1,8 @@
 package com.jpacrud.controller;
 
 import com.jpacrud.dto.BoardDto;
+import com.jpacrud.dto.BoardMgmtDto;
+import com.jpacrud.dto.BoardPostReplyDto;
 import com.jpacrud.dto.PostDto;
 import com.jpacrud.service.BoardPostService;
 import com.jpacrud.service.BoardService;
@@ -33,6 +35,24 @@ public class BoardMgmtApiController {
     public ResponseEntity<Long> createPost (@RequestBody PostDto postDto){
 
         return ResponseEntity.ok(postsService.createPosts(postDto));
+    }
+
+    @PostMapping("/{postsId}/createReply") // 게시글에 댓글 생성
+    public ResponseEntity<Long> createReply (@RequestBody BoardPostReplyDto replyDto){
+
+        return ResponseEntity.ok(postsService.createReply(replyDto).getReplyId());
+    }
+
+    @PostMapping("/updatePost") //게시물 수정
+    public ResponseEntity<Long> updatePost (@RequestBody PostDto postDto) {
+
+        return ResponseEntity.ok(postsService.updatePosts(postDto));
+    }
+
+    @DeleteMapping("/deletePost") //게시물 삭제
+    public void deletePost (@RequestBody PostDto postDto) {
+
+        postsService.deletePosts(postDto);
     }
 
 //    @GetMapping("/read/{id}") //게시판 조회, 아이디로 조회

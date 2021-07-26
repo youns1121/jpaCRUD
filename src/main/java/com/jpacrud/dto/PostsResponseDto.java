@@ -1,18 +1,19 @@
 package com.jpacrud.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
+@Builder
+@NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 public class PostsResponseDto { //조회 사용
 
-    private Long postsId;
-    private String title;
-    private String author;
-    private String content;
+
+    private Long boardId; // 게시판 아이디
+    private Long postsId; // 게시글 아이디
+    private String title; //제목
+    private String content; // 내용
 
 
 }
