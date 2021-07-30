@@ -1,12 +1,14 @@
 package com.jpacrud.domain;
 
-import com.jpacrud.domain.common.CommonDateEntity;
-import com.jpacrud.dto.BoardMgmtDto;
+import com.jpacrud.domain.common.BaseDateEntity;
 import com.jpacrud.dto.BoardPostReplyDto;
 import com.jpacrud.dto.PostDto;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,10 +18,10 @@ import java.util.List;
 @Getter
 @Table(name = "board_post")
 @Entity
-public class BoardPost extends CommonDateEntity {
+public class BoardPost extends BaseDateEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "post_id")
+    @Column(name = "post_id") @NotNull
     private Long postsId;
 
     @Column(name = "post_title")
@@ -33,7 +35,7 @@ public class BoardPost extends CommonDateEntity {
     private Board board; // 게시글 : 게시판 , N:1 관계
 
     @OneToMany(mappedBy = "boardPost", cascade = CascadeType.ALL)
-    private List<BoardPostReply> boardPostReplyList = new ArrayList<>();
+    private List<PostReply> boardPostReplyList = new ArrayList<>();
 
 
 
@@ -55,7 +57,7 @@ public class BoardPost extends CommonDateEntity {
 
     public void addReply(BoardPostReplyDto replyDto) {
 
-        BoardPostReply postReply = new BoardPostReply();
+        PostReply postReply = new PostReply();
         postReply.create(replyDto);
 
 

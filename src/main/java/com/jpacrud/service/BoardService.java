@@ -20,7 +20,13 @@ public class BoardService {
      */
     public Long createBoard(BoardDto boardDto){
 
-        return boardRepository.save(Board.createBoard(boardDto)).getBoardId();
+        Board board = new Board();
+
+        board.create(boardDto);
+
+
+
+        return boardRepository.save(board).getBoardId();
     }
 
 }

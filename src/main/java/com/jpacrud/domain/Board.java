@@ -5,6 +5,8 @@ import com.jpacrud.dto.BoardMgmtDto;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +20,7 @@ public class Board { //게시판
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "board_id")
+    @Column(name = "board_id") @NotNull
     private Long boardId;
 
     @Column(name = "board_name")
@@ -29,7 +31,9 @@ public class Board { //게시판
 
 
 
-    private void create(BoardDto boardDto){
+
+
+    public void create(BoardDto boardDto){
         this.boardName = boardDto.getBoardName();
     }
 
@@ -39,11 +43,11 @@ public class Board { //게시판
      * @param boardDto
      * @return
      */
-    public static Board createBoard(BoardDto boardDto){
-        return Board.builder()
-                .boardName(boardDto.getBoardName())
-                .build();
-    }
+//    public static Board createBoard(BoardDto boardDto){
+//        return Board.builder()
+//                .boardName(boardDto.getBoardName())
+//                .build();
+//    }
 
     /**
      * 게시판 수정

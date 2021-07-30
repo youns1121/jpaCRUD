@@ -13,6 +13,8 @@ public class BoardDto {
     private Long boardId;
     private String boardName;
 
+    private Board board;
+
 
 }
 

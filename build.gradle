@@ -24,6 +24,7 @@ repositories {
         implementation group: 'org.springframework.boot', name: 'spring-boot-devtools', version: '2.5.1'
         implementation 'org.springframework.boot:spring-boot-starter-web'
         implementation 'org.projectlombok:lombok:1.18.18'
+        implementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: '2.5.2'
         compileOnly 'org.projectlombok:lombok'
         annotationProcessor 'org.projectlombok:lombok'
         runtimeOnly 'mysql:mysql-connector-java'

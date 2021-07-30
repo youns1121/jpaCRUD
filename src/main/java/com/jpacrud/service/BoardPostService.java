@@ -3,7 +3,7 @@ package com.jpacrud.service;
 import com.jpacrud.domain.Board;
 import com.jpacrud.domain.BoardPost;
 
-import com.jpacrud.domain.BoardPostReply;
+import com.jpacrud.domain.PostReply;
 import com.jpacrud.dto.BoardPostReplyDto;
 import com.jpacrud.dto.PostDto;
 import com.jpacrud.repository.BoardRepository;
@@ -68,13 +68,13 @@ public class BoardPostService {
      * @return
      */
 
-    public BoardPostReply createReply(BoardPostReplyDto replyDto){
+    public PostReply createReply(BoardPostReplyDto replyDto){
 
 
         BoardPost boardPost = postRepository.findById(replyDto.getPostsId()).orElse(null);
         replyDto.setBoardPost(boardPost);
 
-        BoardPostReply boardPostReply = new BoardPostReply();
+        PostReply boardPostReply = new PostReply();
         boardPostReply.create(replyDto);
 
         return postReplyRepository.save(boardPostReply);

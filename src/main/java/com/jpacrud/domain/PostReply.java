@@ -1,9 +1,7 @@
 package com.jpacrud.domain;
 
-import com.jpacrud.domain.common.CommonDateEntity;
-import com.jpacrud.dto.BoardMgmtDto;
+import com.jpacrud.domain.common.BaseDateEntity;
 import com.jpacrud.dto.BoardPostReplyDto;
-import com.jpacrud.dto.PostDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -17,7 +15,7 @@ import javax.persistence.*;
 @Getter
 @Table(name = "board_post_reply")
 @Entity
-public class BoardPostReply extends CommonDateEntity {
+public class PostReply extends BaseDateEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "reply_id")
@@ -33,7 +31,7 @@ public class BoardPostReply extends CommonDateEntity {
 
 
     /**
-     * 댓글 생성 로직
+     *  답글 생성 로직
      */
 
     public void create(BoardPostReplyDto replyDto){
