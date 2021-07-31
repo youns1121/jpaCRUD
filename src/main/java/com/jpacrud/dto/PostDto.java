@@ -26,9 +26,6 @@ public class PostDto {
     private String content; // 내용
 
 
-    private LocalDateTime createDate;
-
-    private LocalDateTime modifyDate;
 
     private Board board; // 게시판
     private BoardPost boardPost;

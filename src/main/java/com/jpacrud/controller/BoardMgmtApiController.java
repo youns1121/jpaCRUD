@@ -37,19 +37,21 @@ public class BoardMgmtApiController {
         return ResponseEntity.ok(postsService.createPosts(postDto));
     }
 
-    @PostMapping("/{postsId}/createReply") // 게시글에 댓글 생성
-    public ResponseEntity<Long> createReply (@RequestBody BoardPostReplyDto replyDto){
-
-        return ResponseEntity.ok(postsService.createReply(replyDto).getReplyId());
-    }
-
-    @PostMapping("/updatePost") //게시물 수정
+    @PostMapping("/updatePost/{postsId}") //게시물 수정
     public ResponseEntity<Long> updatePost (@RequestBody PostDto postDto) {
 
         return ResponseEntity.ok(postsService.updatePosts(postDto));
     }
 
-    @DeleteMapping("/deletePost") //게시물 삭제
+    @PostMapping("/createReply/{postsId}") // 게시글 답글 생성
+    public ResponseEntity<Long> createReply (@RequestBody BoardPostReplyDto replyDto){
+
+        return ResponseEntity.ok(postsService.createReply(replyDto).getReplyId());
+    }
+
+
+
+    @DeleteMapping("/deletePost/{postsId}") //게시물 삭제
     public void deletePost (@RequestBody PostDto postDto) {
 
         postsService.deletePosts(postDto);

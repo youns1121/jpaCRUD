@@ -21,11 +21,14 @@ public class PostReply extends BaseDateEntity {
     @Column(name = "reply_id")
     private Long replyId;
 
-    @Column(name = "reply_content")
-    private String replyContent;
+    @Column(name ="post_reply_title")
+    private String postReplyTitle;
+
+    @Column(name = "post_reply_content")
+    private String postReplyContent;
 
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "post_id")
     private BoardPost boardPost;
 
@@ -35,10 +38,11 @@ public class PostReply extends BaseDateEntity {
      */
 
     public void create(BoardPostReplyDto replyDto){
-        this.boardPost = BoardPost.builder()
-                .postsId(replyDto.getPostsId())
-                .build();
-        this.replyContent = replyDto.getReplyContent();
+
+        this.boardPost = replyDto.getBoardPost();
+        this.postReplyTitle = replyDto.getPostReplyTitle();
+        this.postReplyContent = replyDto.getPostReplyContent();
+
     }
 
 

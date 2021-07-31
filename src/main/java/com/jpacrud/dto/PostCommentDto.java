@@ -14,11 +14,17 @@ import javax.persistence.*;
 
 public class PostCommentDto {
 
-    private Long postCommentId;
 
-    private String postCommentTitle;
+
+    private Long commentId;
+    private Long commentGroupId;
 
     private String postCommentContent;
 
     private BoardPost boardPost;
+
+    private Long postsId;
+
+
+
 }

@@ -12,12 +12,17 @@ import javax.persistence.ManyToOne;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class BoardPostReplyDto {
+public class BoardPostReplyDto { // 답글 생성
+
 
     private Long postsId;
 
+
+    private String postReplyTitle;
+
+    private String postReplyContent;
+
     private BoardPost boardPost;
 
-    private String replyContent;
 
 }

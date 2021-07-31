@@ -64,7 +64,7 @@ public class BoardPostService {
     }
 
     /**
-     * 댓글 작성하기
+     * 답글 작성하기
      * @return
      */
 

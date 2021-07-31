@@ -21,7 +21,7 @@ import java.util.List;
 public class BoardPost extends BaseDateEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "post_id") @NotNull
+    @Column(name = "post_id")
     private Long postsId;
 
     @Column(name = "post_title")
@@ -55,13 +55,13 @@ public class BoardPost extends BaseDateEntity {
      * 댓글 생성 로직
      */
 
-    public void addReply(BoardPostReplyDto replyDto) {
-
-        PostReply postReply = new PostReply();
-        postReply.create(replyDto);
-
-
-    }
+//    public void replyPost(BoardPostReplyDto replyDto) {
+//
+//        PostReply postReply = new PostReply();
+//        postReply.create(replyDto);
+//
+//
+//    }
 
 
 
