@@ -1,7 +1,12 @@
 plugins {
     id 'org.springframework.boot' version '2.5.2'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    // QueryDSL 추가
+    id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
+
     id 'java'
+
+
 }
 
 group = 'com'
@@ -28,9 +33,13 @@ repositories {
         compileOnly 'org.projectlombok:lombok'
         annotationProcessor 'org.projectlombok:lombok'
 
-        //스웨거
+
+        // Swagger 추가
         implementation group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
         implementation group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
+
+        implementation 'com.querydsl:querydsl-jpa'
+
 
 
 
@@ -40,6 +49,26 @@ repositories {
         testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
         testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
     }
+
+//querydsl 추가 시작
+def querydslDir = "$buildDir/generated/querydsl"
+
+querydsl {
+    jpa = true
+    querydslSourcesDir = querydslDir
+}
+
+sourceSets {
+    main.java.srcDir querydslDir
+}
+
+configurations {
+    querydsl.extendsFrom compileClasspath
+}
+
+compileQuerydsl {
+    options.annotationProcessorPath = configurations.querydsl
+}
 
     test {
         useJUnitPlatform()
