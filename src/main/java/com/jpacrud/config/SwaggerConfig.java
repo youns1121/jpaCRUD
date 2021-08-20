@@ -29,25 +29,14 @@ public class SwaggerConfig  {
     @Bean
     public Docket api_v1() {
         version = "V1";
-        title = "JPA_CRUD" + version;
+        title = "JPA_CRUD_" + version;
         description = "게시판 API_" + version;
         antPattern = "/" + version.toLowerCase() + "/api/**";
 
         return buildApiDocket(version, title, description, antPattern);
     }
 
-    /*
-    version 확장시 사용. sample
-    @Bean
-    public Docket api_v2() {
-        version = "V2";
-        title = "New SKL MNO API_" + version;
-        description = "신규 전산 API_" + version;
-        antPattern = "/" + version.toLowerCase() + "/api/**";
 
-        return buildApiDocket(version, title, description, antPattern);
-    }
-    */
 
     private Docket buildApiDocket(String version, String title, String description, String antPattern){
         return new Docket(DocumentationType.SWAGGER_2)

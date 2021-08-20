@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 
+
 @RequiredArgsConstructor
 @Service
 public class BoardPostService {
@@ -28,16 +29,29 @@ public class BoardPostService {
     /**
      * 생성하기
      */
-    public Long createPosts(PostDto postDto) { // 게시글 생성 (아이디 반환)
+    public Long createPosts(PostDto postDto) throws Exception {
+
 
         Board board = boardRepository.findById(postDto.getBoardId()).orElse(null);
+
+
+            if (board == null) {
+                System.out.println("게시글 아이디가 지정되지 않았습니다");
+                throw new NullPointerException();
+            }
 
         postDto.setBoard(board);
 
         BoardPost boardPost = new BoardPost();
+
         boardPost.createPosts(postDto);
 
         return postRepository.save(boardPost).getPostsId();
+
+
+
+
+
     }
 
 
@@ -49,6 +63,16 @@ public class BoardPostService {
     public Long updatePosts(PostDto postDto) {
 
         BoardPost boardPost = postRepository.findById(postDto.getPostsId()).orElse(null);
+        Board board = boardRepository.findById(postDto.getBoardId()).orElse(null);
+
+        if(boardPost   == null){
+            new NullPointerException();
+            System.out.println("게시글 아이디가 지정되지 않았습니다.");
+        }
+        if(board == null){
+            new NullPointerException();
+            System.out.println("게시판 아이디가 지정되지 않았습니다.");
+        }
 
         boardPost.createPosts(postDto);
 

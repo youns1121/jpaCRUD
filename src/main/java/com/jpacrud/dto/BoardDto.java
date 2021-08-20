@@ -1,6 +1,7 @@
 package com.jpacrud.dto;
 
 import com.jpacrud.domain.Board;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 
 @Getter
@@ -10,10 +11,11 @@ import lombok.*;
 @Builder
 public class BoardDto {
 
-    private Long boardId;
+//    private Long boardId;
+    @ApiModelProperty(value = "게시판 이름",  notes = "게시판 이름")
     private String boardName;
 
-    private Board board;
+//    private Board board;
 
 
 }
