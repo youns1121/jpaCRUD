@@ -10,6 +10,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class BoardService {
 
+    /**
+     *  관리자(admin) 권한예정
+     */
+
     private final BoardRepository boardRepository;
 
 
@@ -24,9 +28,21 @@ public class BoardService {
 
         board.create(boardDto);
 
-
-
         return boardRepository.save(board).getBoardId();
     }
 
+    /**
+     * 게시판 수정
+     */
+
+    public Long updateBoard(BoardDto boardDto){
+        Board board = boardRepository.findById(boardDto.getBoardId()).orElse(null);
+
+        boardDto.setBoard(board);
+
+
+        board.create(boardDto);
+
+        return boardRepository.save(board).getBoardId();
+    }
 }

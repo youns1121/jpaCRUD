@@ -11,11 +11,12 @@ import lombok.*;
 @Builder
 public class BoardDto {
 
-//    private Long boardId;
+    private Long boardId;
     @ApiModelProperty(value = "게시판 이름",  notes = "게시판 이름")
     private String boardName;
 
-//    private Board board;
+    @ApiModelProperty(hidden = true)
+    private Board board;
 
 
 }
