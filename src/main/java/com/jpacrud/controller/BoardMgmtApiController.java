@@ -1,7 +1,6 @@
 package com.jpacrud.controller;
 
 import com.jpacrud.dto.BoardDto;
-import com.jpacrud.dto.BoardMgmtDto;
 import com.jpacrud.dto.BoardPostReplyDto;
 import com.jpacrud.dto.PostDto;
 import com.jpacrud.service.BoardPostService;
@@ -46,7 +45,8 @@ public class BoardMgmtApiController {
     @PostMapping("/createReply/{postsId}") // 게시글 답글 생성
     public ResponseEntity<Long> createReply (@RequestBody BoardPostReplyDto replyDto){
 
-        return ResponseEntity.ok(postsService.createReply(replyDto).getReplyId());
+        return ResponseEntity.ok(postsService.createReply(replyDto));
+
     }
 
 

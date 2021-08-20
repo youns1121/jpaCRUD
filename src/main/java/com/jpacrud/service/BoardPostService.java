@@ -68,7 +68,7 @@ public class BoardPostService {
      * @return
      */
 
-    public PostReply createReply(BoardPostReplyDto replyDto){
+    public Long createReply(BoardPostReplyDto replyDto){
 
 
         BoardPost boardPost = postRepository.findById(replyDto.getPostsId()).orElse(null);
@@ -77,7 +77,7 @@ public class BoardPostService {
         PostReply boardPostReply = new PostReply();
         boardPostReply.create(replyDto);
 
-        return postReplyRepository.save(boardPostReply);
+        return postReplyRepository.save(boardPostReply).getReplyId();
 
 
 

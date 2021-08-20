@@ -12,9 +12,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 @Getter
 @Table(name = "board_post")
 @Entity
@@ -34,8 +34,9 @@ public class BoardPost extends BaseDateEntity {
     @JoinColumn(name="board_id")
     private Board board; // 게시글 : 게시판 , N:1 관계
 
+    @Builder.Default
     @OneToMany(mappedBy = "boardPost", cascade = CascadeType.ALL)
-    private List<PostReply> boardPostReplyList = new ArrayList<>();
+    private List<PostReply> postReplyList = new ArrayList<>();
 
 
 

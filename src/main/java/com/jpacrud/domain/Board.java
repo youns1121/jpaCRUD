@@ -27,8 +27,9 @@ public class Board extends BaseDateEntity { //게시판
     @Column(name = "board_name")
     private String boardName;
 
+
     @OneToMany(mappedBy = "board", cascade = CascadeType.ALL)
-    private List<BoardPost> postsList = new ArrayList<>();
+    private List<BoardPost> boardPostList = new ArrayList<>();
 
 
 
