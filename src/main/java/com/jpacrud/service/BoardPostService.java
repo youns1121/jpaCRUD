@@ -11,8 +11,7 @@ import com.jpacrud.repository.PostReplyRepository;
 import com.jpacrud.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 
 
 @RequiredArgsConstructor
@@ -29,6 +28,7 @@ public class BoardPostService {
     /**
      * 생성하기
      */
+    @Transactional
     public Long createPosts(PostDto postDto) throws Exception {
 
 
@@ -82,6 +82,7 @@ public class BoardPostService {
     /**
      * 삭제하기
      */
+    @Transactional
     public void deletePosts(PostDto postDto) { // 게시글 삭제하기
         postRepository.deleteById(postDto.getPostsId());
 
@@ -92,6 +93,7 @@ public class BoardPostService {
      * @return
      */
 
+    @Transactional
     public Long createReply(BoardPostReplyDto replyDto){
 
 

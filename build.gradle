@@ -41,6 +41,8 @@ repositories {
         implementation 'com.querydsl:querydsl-jpa'
 
 
+        //Envers 추가, 컬럼의 변경 이력 남기기 위함
+        implementation('org.hibernate:hibernate-envers')
 
 
 

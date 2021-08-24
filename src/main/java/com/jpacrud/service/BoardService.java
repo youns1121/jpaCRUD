@@ -5,6 +5,7 @@ import com.jpacrud.dto.BoardDto;
 import com.jpacrud.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
 @Service
@@ -22,6 +23,7 @@ public class BoardService {
      * @param boardDto
      * @return
      */
+    @Transactional
     public Long createBoard(BoardDto boardDto){
 
         Board board = new Board();
@@ -34,7 +36,7 @@ public class BoardService {
     /**
      * 게시판 수정
      */
-
+    @Transactional
     public Long updateBoard(BoardDto boardDto){
         Board board = boardRepository.findById(boardDto.getBoardId()).orElse(null);
 
@@ -45,4 +47,15 @@ public class BoardService {
 
         return boardRepository.save(board).getBoardId();
     }
+
+
+    /**
+     * 게시판 삭제
+     */
+    @Transactional
+    public void deleteBoard(BoardDto boardDto){
+
+        boardRepository.deleteById(boardDto.getBoardId());
+    }
+
 }

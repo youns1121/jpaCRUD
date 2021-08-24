@@ -1,6 +1,7 @@
 package com.jpacrud.domain;
 
 import com.jpacrud.domain.common.BaseDateEntity;
+import com.jpacrud.domain.common.BaseEntity;
 import com.jpacrud.dto.PostCommentDto;
 import com.jpacrud.dto.PostDto;
 import lombok.AllArgsConstructor;
@@ -17,7 +18,7 @@ import javax.persistence.*;
 
 @Table(name = "board_post_comment")
 @Entity
-public class PostComment extends BaseDateEntity { // 댓글 달기
+public class PostComment extends BaseEntity { // 댓글 달기
 
     @EmbeddedId
     private CommentAttr commentAttr;

@@ -1,6 +1,7 @@
 package com.jpacrud.domain;
 
 import com.jpacrud.domain.common.BaseDateEntity;
+import com.jpacrud.domain.common.BaseEntity;
 import com.jpacrud.dto.BoardPostReplyDto;
 import com.jpacrud.dto.PostDto;
 import lombok.*;
@@ -18,7 +19,7 @@ import java.util.List;
 @Getter
 @Table(name = "board_post")
 @Entity
-public class BoardPost extends BaseDateEntity {
+public class BoardPost extends BaseEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "post_id")

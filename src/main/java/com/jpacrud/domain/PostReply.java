@@ -1,6 +1,7 @@
 package com.jpacrud.domain;
 
 import com.jpacrud.domain.common.BaseDateEntity;
+import com.jpacrud.domain.common.BaseEntity;
 import com.jpacrud.dto.BoardPostReplyDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,7 +16,7 @@ import javax.persistence.*;
 @Getter
 @Table(name = "board_post_reply")
 @Entity
-public class PostReply extends BaseDateEntity {
+public class PostReply extends BaseEntity { //답글 생성
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "reply_id")
