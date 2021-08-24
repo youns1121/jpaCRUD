@@ -1,6 +1,7 @@
 package com.jpacrud.domain;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -11,8 +12,10 @@ import java.io.Serializable;
 
 @Getter
 
+@NoArgsConstructor
+
 @Embeddable
-public class CommentAttr implements Serializable {
+public class CommentAttrId implements Serializable {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "comment_id")

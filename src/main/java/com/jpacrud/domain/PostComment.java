@@ -21,7 +21,7 @@ import javax.persistence.*;
 public class PostComment extends BaseEntity { // 댓글 달기
 
     @EmbeddedId
-    private CommentAttr commentAttr;
+    private CommentAttrId commentAttrid;
 
 
     @Column(name="post_content")

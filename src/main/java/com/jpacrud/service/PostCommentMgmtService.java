@@ -23,7 +23,8 @@ public class PostCommentMgmtService {
         PostComment postComment = new PostComment();
         postComment.createComment(postCommentDto);
 
-        return postCommentRepository.save(postComment).getCommentAttr().getCommentId();
+        return null;
+        //return postCommentRepository.save(postComment).getCommentAttr().getCommentId();
 
 
 

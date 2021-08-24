@@ -33,6 +33,9 @@ public class PostReply extends BaseEntity { //답글 생성
     @JoinColumn(name = "post_id")
     private BoardPost boardPost;
 
+    public void setBoardPost(BoardPost boardPost) {
+        this.boardPost = boardPost;
+    }
 
     /**
      *  답글 생성 로직

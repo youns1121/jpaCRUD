@@ -2,6 +2,8 @@ package com.jpacrud.service;
 
 import com.jpacrud.domain.Board;
 import com.jpacrud.dto.BoardDto;
+
+import com.jpacrud.exception.CustomException;
 import com.jpacrud.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -39,6 +41,8 @@ public class BoardService {
     @Transactional
     public Long updateBoard(BoardDto boardDto){
         Board board = boardRepository.findById(boardDto.getBoardId()).orElse(null);
+
+
 
         boardDto.setBoard(board);
 

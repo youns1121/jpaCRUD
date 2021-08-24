@@ -6,6 +6,7 @@ import com.jpacrud.domain.BoardPost;
 import com.jpacrud.domain.PostReply;
 import com.jpacrud.dto.BoardPostReplyDto;
 import com.jpacrud.dto.PostDto;
+import com.jpacrud.exception.CustomException;
 import com.jpacrud.repository.BoardRepository;
 import com.jpacrud.repository.PostReplyRepository;
 import com.jpacrud.repository.PostRepository;
@@ -29,16 +30,15 @@ public class BoardPostService {
      * 생성하기
      */
     @Transactional
-    public Long createPosts(PostDto postDto) throws Exception {
+    public Long createPosts(PostDto postDto){
 
 
-        Board board = boardRepository.findById(postDto.getBoardId()).orElse(null);
+        Board board = boardRepository.findById(postDto.getBoardId()).orElseThrow(()->{
+
+        throw new CustomException("boardId is NULL");
+        });
 
 
-            if (board == null) {
-                System.out.println("게시글 아이디가 지정되지 않았습니다");
-                throw new NullPointerException();
-            }
 
         postDto.setBoard(board);
 
@@ -63,16 +63,6 @@ public class BoardPostService {
     public Long updatePosts(PostDto postDto) {
 
         BoardPost boardPost = postRepository.findById(postDto.getPostsId()).orElse(null);
-        Board board = boardRepository.findById(postDto.getBoardId()).orElse(null);
-
-        if(boardPost   == null){
-            new NullPointerException();
-            System.out.println("게시글 아이디가 지정되지 않았습니다.");
-        }
-        if(board == null){
-            new NullPointerException();
-            System.out.println("게시판 아이디가 지정되지 않았습니다.");
-        }
 
         boardPost.createPosts(postDto);
 

@@ -45,8 +45,6 @@ public class BoardPost extends BaseEntity {
      * 게시글 생성 로직
      * @param postDto
      */
-
-
     public void createPosts(PostDto postDto){
         this.board = postDto.getBoard();
         this.title = postDto.getTitle();
@@ -54,16 +52,23 @@ public class BoardPost extends BaseEntity {
     }
 
     /**
-     * 댓글 생성 로직
+     * 답글 생성 로직
      */
 
-//    public void replyPost(BoardPostReplyDto replyDto) {
+//    public void addPostReply(PostReply postReply) {
 //
-//        PostReply postReply = new PostReply();
-//        postReply.create(replyDto);
+//        boardPostReplyList.add(postReply);
+//        postReply.setBoardPost(this);
+//    }
+
+//    public void createPostReply(BoardPostReplyDto boardPostReplyDto){
+//       BoardPost boardPost = new BoardPost();
+//       boardPost.addPostReply((PostReply) boardPostReplyDto.getPostReply());
 //
 //
 //    }
+
+
 
 
 

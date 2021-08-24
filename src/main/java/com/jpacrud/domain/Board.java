@@ -28,6 +28,7 @@ public class Board extends BaseEntity { //게시판
     private String boardName;
 
 
+    @Builder.Default
     @OneToMany(mappedBy = "board", cascade = CascadeType.ALL)
     private List<BoardPost> boardPostList = new ArrayList<>();
 
