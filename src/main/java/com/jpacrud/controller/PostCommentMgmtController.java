@@ -23,6 +23,13 @@ public class PostCommentMgmtController {
         return ResponseEntity.ok(postCommentMgmtService.createPostComment(postCommentDto));
     }
 
+    @ApiOperation(value = "대댓글 생성", notes = "대댓글을 생성합니다.")
+    @PostMapping("/createPostReplyComment")
+    public ResponseEntity<Long> createPostReplyComment (@RequestBody PostCommentDto postCommentDto){
+
+        return ResponseEntity.ok(postCommentMgmtService.createPostReplyComment(postCommentDto))
+    }
+
 
     @ApiOperation(value = "댓글 삭제", notes = "댓글을 삭제합니다.")
     @DeleteMapping("/deletePostComment/{postsId}/{postCommentId}")

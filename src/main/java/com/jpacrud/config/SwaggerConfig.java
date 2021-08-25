@@ -25,20 +25,22 @@ public class SwaggerConfig  {
     private String version;
     private String description;
     private String antPattern;
+    private String made;
 
     @Bean
     public Docket api_v1() {
         version = "V1";
+        made = " made by : ysmin";
         title = "JPA_CRUD_" + version;
-        description = "게시판 API_" + version;
+        description = "게시판 API_" + version + made;
         antPattern = "/" + version.toLowerCase() + "/api/**";
 
-        return buildApiDocket(version, title, description, antPattern);
+        return buildApiDocket(version, made, title, description, antPattern);
     }
 
 
 
-    private Docket buildApiDocket(String version, String title, String description, String antPattern){
+    private Docket buildApiDocket(String version, String made, String title, String description, String antPattern){
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
                 .apis(RequestHandlerSelectors.any())

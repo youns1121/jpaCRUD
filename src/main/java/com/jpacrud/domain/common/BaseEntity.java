@@ -17,7 +17,7 @@ import javax.persistence.MappedSuperclass;
 public abstract class BaseEntity extends BaseDateEntity {
 
     @NotAudited
-    @Column(nullable = false, name = "del_yn"/*, columnDefinition ="char(1) comment '삭제 여부'"*/)
+    @Column(nullable = false, name = "del_yn")
     @ColumnDefault("'N'")
     private String delYn = "N";
 }

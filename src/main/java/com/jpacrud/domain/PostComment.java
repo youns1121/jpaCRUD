@@ -10,6 +10,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -24,13 +26,12 @@ public class PostComment extends BaseEntity { // 댓글 달기
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long postCommentId;
 
-
     @Column(name="post_content")
     private String postCommentContent;
 
-    @ManyToOne(fetch = FetchType.LAZY) //대댓글 달기
+    @OneToMany() //대댓글 달기
     @JoinColumn(name = "child_comment_id")
-    private PostComment childPostComment;
+    private List<PostComment> childPostComments = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "post_id")
@@ -46,9 +47,16 @@ public class PostComment extends BaseEntity { // 댓글 달기
     }
 
     /**
-     * 대댓글 쓰기 : 댓글
+     * 대댓글 쓰기 :
+     *              댓글
      *               ㄴ 댓글
      */
+
+    public void createReplyComment(PostCommentDto postCommentDto){
+        this.boardPost = postCommentDto.getBoardPost();
+        this.childPostComments = postCommentDto.getChildPostComments();
+        this.postCommentContent = postCommentDto.getPostCommentContent();
+    }
 
 
 

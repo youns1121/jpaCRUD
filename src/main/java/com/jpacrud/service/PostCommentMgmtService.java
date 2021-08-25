@@ -9,6 +9,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 @RequiredArgsConstructor
@@ -33,7 +35,23 @@ public class PostCommentMgmtService {
         postComment.createComment(postCommentDto);
 
         return postCommentRepository.save(postComment).getPostCommentId();
+    }
 
+    /**
+     * 대댓글 생성하기
+     */
+
+    @Transactional
+    public Long createPostReplyComment(PostCommentDto postCommentDto){
+
+        PostComment postComment = postCommentRepository.findById(postCommentDto.getPostCommentId()).orElseThrow(()
+                -> new NoSuchElementException("postCommentId not found"));
+
+        postCommentDto.setPostComment(postComment);
+
+        postComment.createReplyComment(postCommentDto);
+
+        postCommentRepository.save(postComment);
     }
 
     /**
