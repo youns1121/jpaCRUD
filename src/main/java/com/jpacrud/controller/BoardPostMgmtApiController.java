@@ -22,7 +22,7 @@ public class BoardPostMgmtApiController {
 
     @ApiOperation(value = "게시글 생성", notes = "게시글을 생성합니다.")
     @PostMapping("/createPost")
-    public ResponseEntity<Long> createPost (@RequestBody PostDto postDto) throws Exception {
+    public ResponseEntity<Long> createPost (@RequestBody PostDto postDto)  {
 
         return ResponseEntity.ok(postsService.createPosts(postDto));
     }

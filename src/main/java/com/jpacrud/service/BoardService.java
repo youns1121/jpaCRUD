@@ -3,7 +3,6 @@ package com.jpacrud.service;
 import com.jpacrud.domain.Board;
 import com.jpacrud.dto.BoardDto;
 
-import com.jpacrud.exception.CustomException;
 import com.jpacrud.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

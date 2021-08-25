@@ -15,17 +15,22 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Builder
 @Getter
-
 @Table(name = "board_post_comment")
 @Entity
 public class PostComment extends BaseEntity { // 댓글 달기
 
-    @EmbeddedId
-    private CommentAttrId commentAttrid;
+    @Id
+    @Column(name="post_comment_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long postCommentId;
 
 
     @Column(name="post_content")
     private String postCommentContent;
+
+    @ManyToOne(fetch = FetchType.LAZY) //대댓글 달기
+    @JoinColumn(name = "child_comment_id")
+    private PostComment childPostComment;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "post_id")
@@ -41,7 +46,8 @@ public class PostComment extends BaseEntity { // 댓글 달기
     }
 
     /**
-     * 대댓글 쓰기 : 댓글 -> 댓글
+     * 대댓글 쓰기 : 댓글
+     *               ㄴ 댓글
      */
 
 

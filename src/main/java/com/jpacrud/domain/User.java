@@ -1,7 +1,7 @@
 package com.jpacrud.domain;
 
-import com.jpacrud.config.StatusEnum;
 import com.jpacrud.domain.common.BaseEntity;
+import com.jpacrud.enums.StatusEnums;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -43,6 +43,6 @@ public class User extends BaseEntity {
     @Column(name = "user_phone")
     private String userPhone;
 
-    private StatusEnum statusEnum;
+    private StatusEnums.UserRole userRole;
 
 }

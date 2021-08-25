@@ -35,10 +35,12 @@ public class BoardPost extends BaseEntity {
     @JoinColumn(name="board_id")
     private Board board; // 게시글 : 게시판 , N:1 관계
 
-    @Builder.Default
+
     @OneToMany(mappedBy = "boardPost", cascade = CascadeType.ALL)
     private List<PostReply> postReplyList = new ArrayList<>();
 
+    @OneToMany(mappedBy = "boardPost", cascade = CascadeType.ALL)
+    private List<PostComment> postCommentList = new ArrayList<>();
 
 
     /**

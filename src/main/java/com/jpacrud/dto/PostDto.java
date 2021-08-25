@@ -36,9 +36,7 @@ public class PostDto {
     @ApiModelProperty(hidden = true)
     private Board board;
 
-//    private BoardPost boardPost;
-//    private PostReply Reply;
-//    private String replyContent;
+
 
 
 

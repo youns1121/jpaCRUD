@@ -1,6 +1,7 @@
 package com.jpacrud.dto;
 
 import com.jpacrud.domain.BoardPost;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 
 import javax.persistence.*;
@@ -15,15 +16,16 @@ import javax.persistence.*;
 public class PostCommentDto {
 
 
+    private Long postsId;
 
-    private Long commentId;
-    private Long commentGroupId;
+    private Long postCommentId;
+
 
     private String postCommentContent;
 
+    @ApiModelProperty(hidden = true)
     private BoardPost boardPost;
 
-    private Long postsId;
 
 
 

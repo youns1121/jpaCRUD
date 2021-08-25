@@ -3,16 +3,19 @@ package com.jpacrud.service;
 import com.jpacrud.domain.Board;
 import com.jpacrud.domain.BoardPost;
 
+import com.jpacrud.domain.PostComment;
 import com.jpacrud.domain.PostReply;
 import com.jpacrud.dto.BoardPostReplyDto;
 import com.jpacrud.dto.PostDto;
-import com.jpacrud.exception.CustomException;
+import com.jpacrud.exception.BoardIdEmptyException;
 import com.jpacrud.repository.BoardRepository;
 import com.jpacrud.repository.PostReplyRepository;
 import com.jpacrud.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.NoSuchElementException;
 
 
 @RequiredArgsConstructor
@@ -33,12 +36,7 @@ public class BoardPostService {
     public Long createPosts(PostDto postDto){
 
 
-        Board board = boardRepository.findById(postDto.getBoardId()).orElseThrow(()->{
-
-        throw new CustomException("boardId is NULL");
-        });
-
-
+        Board board = boardRepository.findById(postDto.getBoardId()).orElseThrow(() -> new NoSuchElementException("boardId not found"));
 
         postDto.setBoard(board);
 
@@ -62,7 +60,9 @@ public class BoardPostService {
     @Transactional
     public Long updatePosts(PostDto postDto) {
 
-        BoardPost boardPost = postRepository.findById(postDto.getPostsId()).orElse(null);
+        BoardPost boardPost = postRepository.findById(postDto.getPostsId()).orElseThrow(()->
+                new NoSuchElementException("postsId not found")
+        );
 
         boardPost.createPosts(postDto);
 
@@ -87,7 +87,9 @@ public class BoardPostService {
     public Long createReply(BoardPostReplyDto replyDto){
 
 
-        BoardPost boardPost = postRepository.findById(replyDto.getPostsId()).orElse(null);
+        BoardPost boardPost = postRepository.findById(replyDto.getPostsId()).orElseThrow(() -> new NoSuchElementException("postsId not found"));
+
+
         replyDto.setBoardPost(boardPost);
 
         PostReply boardPostReply = new PostReply();
