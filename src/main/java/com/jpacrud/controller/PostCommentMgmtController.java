@@ -1,7 +1,7 @@
 package com.jpacrud.controller;
 
-import com.jpacrud.dto.PostCommentDto;
-import com.jpacrud.service.PostCommentMgmtService;
+import com.jpacrud.dto.BoardCommentDto;
+import com.jpacrud.service.BoardCommentMgmtService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -14,27 +14,27 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value ="/v1/api")
 public class PostCommentMgmtController {
 
-    private final PostCommentMgmtService postCommentMgmtService;
+    private final BoardCommentMgmtService boardCommentMgmtService;
 
     @ApiOperation(value = "댓글 생성", notes = "댓글을 생성합니다.")
     @PostMapping("/createPostComment")
-    public ResponseEntity<Long> createPostComment (@RequestBody PostCommentDto postCommentDto){
+    public ResponseEntity<Long> createPostComment (@RequestBody BoardCommentDto boardCommentDto){
 
-        return ResponseEntity.ok(postCommentMgmtService.createPostComment(postCommentDto));
+        return ResponseEntity.ok(boardCommentMgmtService.createBoardComment(boardCommentDto));
     }
 
     @ApiOperation(value = "대댓글 생성", notes = "대댓글을 생성합니다.")
     @PostMapping("/createPostReplyComment")
-    public ResponseEntity<Long> createPostReplyComment (@RequestBody PostCommentDto postCommentDto){
+    public ResponseEntity<Long> createPostReplyComment (@RequestBody BoardCommentDto boardCommentDto){
 
-        return ResponseEntity.ok(postCommentMgmtService.createPostReplyComment(postCommentDto))
+        return ResponseEntity.ok(boardCommentMgmtService.createPostReplyComment(boardCommentDto));
     }
 
 
     @ApiOperation(value = "댓글 삭제", notes = "댓글을 삭제합니다.")
     @DeleteMapping("/deletePostComment/{postsId}/{postCommentId}")
-    public void deletePostComment (@RequestBody PostCommentDto postCommentDto){
+    public void deletePostComment (@RequestBody BoardCommentDto boardCommentDto){
 
-        postCommentMgmtService.deletePostComment(postCommentDto);
+        boardCommentMgmtService.deletePostComment(boardCommentDto);
     }
 }
