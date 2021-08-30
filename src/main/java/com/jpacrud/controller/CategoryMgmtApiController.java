@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @Api(value = "카테고리 관리 API", tags = "카테고리 관리 API")
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(value ="/v1/api")
+@RequestMapping(value ="/api/v1")
 public class CategoryMgmtApiController {
 
 

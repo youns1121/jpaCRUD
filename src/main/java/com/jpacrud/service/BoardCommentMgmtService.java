@@ -43,14 +43,17 @@ public class BoardCommentMgmtService {
     @Transactional
     public Long createPostReplyComment(BoardCommentDto boardCommentDto){
 
-        BoardComment boardComment = boardCommentRepository.findById(boardCommentDto.getBoardCommentId()).orElseThrow(()
-                -> new NoSuchElementException("boardCommentId not found"));
+        BoardComment  childComments = boardCommentRepository.save(
 
-        boardCommentDto.setBoardComment(boardComment);
+                boardCommentRepository.findById(boardCommentDto.getBoardCommentId()).orElseThrow(()
+                -> new NoSuchElementException("boardCommentId not found"))
+        );
 
-        boardComment.createReplyComment(boardCommentDto);
+        boardCommentDto.setBoardComment(childComments);
 
-        return null;
+        childComments.createReplyComment(boardCommentDto);
+
+        return childComments.getBoardCommentId();
     }
 
     /**

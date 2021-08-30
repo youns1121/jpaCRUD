@@ -16,6 +16,10 @@ public class CategoryDto {
     @ApiModelProperty(value = "카테고리 이름",  notes = "카테고리 이름")
     private String categoryName;
 
+
+//    @ApiModelProperty(hidden = true)
+    private String delYn;
+
     @ApiModelProperty(hidden = true)
     private Category category;
 

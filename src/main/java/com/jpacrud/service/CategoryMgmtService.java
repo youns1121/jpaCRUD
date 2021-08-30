@@ -58,7 +58,8 @@ public class CategoryMgmtService {
     @Transactional
     public void deleteBoard(CategoryDto categoryDto){
 
-        categoryRepository.deleteById(categoryDto.getCategoryId());
+        categoryRepository.findById(categoryDto.getCategoryId());
+
     }
 
 }

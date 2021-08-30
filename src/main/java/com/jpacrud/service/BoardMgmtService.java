@@ -5,6 +5,8 @@ import com.jpacrud.domain.BoardReply;
 import com.jpacrud.domain.Category;
 import com.jpacrud.dto.BoardReplyDto;
 import com.jpacrud.dto.BoardDto;
+import com.jpacrud.dto.request.BoardListRequestDto;
+import com.jpacrud.dto.response.BoardListResponseDto;
 import com.jpacrud.repository.CategoryRepository;
 import com.jpacrud.repository.BoardReplyRepository;
 import com.jpacrud.repository.BoardRepository;
@@ -12,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 
@@ -92,21 +95,33 @@ public class BoardMgmtService {
         boardReply.create(replyDto);
 
         return boardReplyRepository.save(boardReply).getBoardReplyId();
+    }
+
+    /**
+     * 게시판 전체 리스트 조회 -간단 조회
+     * @param
+     * @return
+     */
+
+    @Transactional
+    public List<BoardListResponseDto> findBoardList(){
 
 
-
+        return null;
     }
 
 
-
-//    public Optional<BoardPost> getPost(long postId) { // 게시물id로 게시물 단건 조회
+//    @Transactional(readOnly = true)
+//    public Page<BoardListDto> boardList(Pageable pageable) {
 //
-//        return postRepository.findById(postId);
+//        Page<Board> boardList = boardRepository.findAll(pageable);
+//
+//        Page<BoardListDto> boardListDtoPage = boardList.map(
+//                board -> new BoardListDto(
+//                        board.getCategory().getCategoryId(), board.getBoardId(), board.getBoardTitle(), board.getCreateDate()
+//                ));
+//        return boardListDtoPage;
 //    }
-
-
-//
-
 
 
 

@@ -45,4 +45,7 @@ public class User extends BaseEntity {
 
     private StatusEnums.UserRole userRole;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Board board;
+
 }

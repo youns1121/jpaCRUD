@@ -2,10 +2,13 @@ package com.jpacrud.controller;
 
 import com.jpacrud.dto.BoardReplyDto;
 import com.jpacrud.dto.BoardDto;
+import com.jpacrud.dto.response.BoardListResponseDto;
 import com.jpacrud.service.BoardMgmtService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @Api(value = "게시판 관리 API", tags = "게시판 관리 API")
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(value ="/v1/api")
+@RequestMapping(value ="/api/v1")
 public class BoardMgmtApiController {
 
     private final BoardMgmtService boardMgmtService;
@@ -45,14 +48,24 @@ public class BoardMgmtApiController {
     public ResponseEntity<Long> createBoardReply (@RequestBody BoardReplyDto replyDto){
 
         return ResponseEntity.ok(boardMgmtService.createBoardReply(replyDto));
-
     }
-
 
     @ApiOperation(value = "게시판 삭제", notes = "게시판을 삭제합니다.")
     @DeleteMapping("/deleteBoard/{boardId}")
     public void deleteBoard (@RequestBody BoardDto boardDto) {
 
         boardMgmtService.deleteBoard(boardDto);
+    }
+
+
+    /**
+     * 게시판 목록 조회
+     */
+    @ApiOperation(value = "게시판 목록 조회", notes = "게시판의 목록을 조회 합니다.")
+    @GetMapping("/boardList")
+    public Page<BoardListResponseDto> getBoardList(Pageable pageable){
+
+        return null;
+//        return boardMgmtService.boardList(pageable);
     }
 }
