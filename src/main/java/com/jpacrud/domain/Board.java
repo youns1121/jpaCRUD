@@ -1,60 +1,83 @@
 package com.jpacrud.domain;
 
-
-import com.jpacrud.domain.common.BaseEntity;
+import com.jpacrud.domain.common.BaseDateEntity;
 import com.jpacrud.dto.BoardDto;
-
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+@Getter
+@Table(name = "board")
 @Entity
-@Table(name="board")
-public class Board extends BaseEntity { //게시판
+public class Board extends BaseDateEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "board_id")
     private Long boardId;
 
-    @Column(name = "board_name")
-    private String boardName;
+    @Column(name = "board_title")
+    private String boardTitle;
 
+    @Column(name="board_content")
+    private String boardContent;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @JoinColumn(name="category_id")
+    private Category category;
 
     @Builder.Default
-    @OneToMany(mappedBy = "board", cascade = CascadeType.ALL)
-    private List<BoardPost> boardPostList = new ArrayList<>();
-
-
-
-
-
-    public void create(BoardDto boardDto){
-        this.boardName = boardDto.getBoardName();
-    }
+    @OneToMany(mappedBy = "board")
+    private List<BoardReply> boardReplyList = new ArrayList<>();
 
 
     /**
-     * 게시판 생성
-     * @param boardDto
-     * @return
+     * 게시판 생성 로직
      */
-//    public static Board createBoard(BoardDto boardDto){
-//        return Board.builder()
-//                .boardName(boardDto.getBoardName())
-//                .build();
+
+    public void createBoard(BoardDto boardDto){
+
+        this.category = boardDto.getCategory();
+        this.boardTitle = boardDto.getBoardTitle();
+        this.boardContent = boardDto.getBoardContent();
+
+
+    }
+
+    /**
+     * 댓글 생성 로직
+     */
+
+//    public void replyPost(CategoryPostReplyDto replyDto) {
+//
+//        PostReply postReply = new PostReply();
+//        postReply.create(replyDto);
+//
+//
+//    }
+
+
+
+//    public void createReply(CategoryPostReplyDto replyDto){
+//
+//
+//        CategoryPostReply CategoryPostReply = new CategoryPostReply();
+//        CategoryPostReply.create(replyDto);
 //    }
 
     /**
-     * 게시판 수정
+     * 업데이트 로직
      */
+
+
+
 
 
 

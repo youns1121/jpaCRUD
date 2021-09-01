@@ -9,7 +9,4 @@ import org.junit.jupiter.api.DisplayName;
 
 class JpaCrudApplicationTests {
 
-
-
-
 }

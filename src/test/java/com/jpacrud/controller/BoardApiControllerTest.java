@@ -1,7 +1,5 @@
 package com.jpacrud.controller;
 
-import com.jpacrud.dto.PostDto;
-import com.jpacrud.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

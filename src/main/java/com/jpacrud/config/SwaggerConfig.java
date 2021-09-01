@@ -28,8 +28,8 @@ public class SwaggerConfig  {
     private String made;
 
     @Bean
-    public Docket api_v1() {
-        version = "V1";
+    public Docket api_v2() {
+        version = "V2";
         made = " made by : ysmin";
         title = "JPA_CRUD_" + version;
         description = "게시판 API_" + version + made;
