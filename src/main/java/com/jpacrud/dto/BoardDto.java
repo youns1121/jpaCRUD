@@ -1,6 +1,7 @@
 package com.jpacrud.dto;
 
 import com.jpacrud.domain.Board;
+import com.jpacrud.domain.Category;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 
@@ -14,7 +15,7 @@ import lombok.*;
 
 public class BoardDto {
 
-    @NotBlank
+
     @ApiModelProperty(value = "카테고리 제목")
     private Long categoryId;
 
@@ -27,6 +28,7 @@ public class BoardDto {
     @ApiModelProperty(value = "게시판 내용")
     private String boardContent;
 
+    private Category category;
 
     @ApiModelProperty(hidden = true)
     private Board board;

@@ -1,6 +1,7 @@
 package com.jpacrud.repository;
 
 import com.jpacrud.domain.Board;
+import com.jpacrud.repository.custom.CustomBoardRepository;
 import lombok.Builder;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

@@ -1,13 +1,15 @@
 package com.jpacrud.controller;
 
 import com.jpacrud.dto.BoardDto;
-import com.jpacrud.dto.BoardPostReplyDto;
-import com.jpacrud.dto.PostDto;
-import com.jpacrud.service.BoardPostService;
-import com.jpacrud.service.BoardService;
+
+import com.jpacrud.dto.BoardReplyDto;
+import com.jpacrud.dto.response.BoardResponseDto;
+import com.jpacrud.service.BoardMgmtService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -62,7 +64,7 @@ public class BoardMgmtApiController {
     @GetMapping("/selectBoard")
     public  ResponseEntity<Page<BoardResponseDto>> getBoardList(Pageable pageable){
 
-        Page<BoardResponseDto>  boardResponseDtos = boardMgmtService.getBoardList(pageable);
+        Page<BoardResponseDto> boardResponseDtos = boardMgmtService.getBoardList(pageable);
 
         return ResponseEntity.ok(boardResponseDtos);
     }
