@@ -53,13 +53,13 @@ public class BoardMgmtService {
      */
 
     @Transactional
-    public Long updateBoard(BoardDto BoardDto) {
+    public Long updateBoard(BoardDto boardDto) {
 
-        Board board = boardRepository.findById(BoardDto.getBoardId()).orElseThrow(()->
+        Board board = boardRepository.findById(boardDto.getBoardId()).orElseThrow(()->
                 new NoSuchElementException("BoardId not found")
         );
 
-        board.createBoard(BoardDto);
+        board.createBoard(boardDto);
 
         return boardRepository.save(board).getBoardId();
     }
@@ -68,8 +68,8 @@ public class BoardMgmtService {
      * 게시판 삭제하기
      */
     @Transactional
-    public void deleteBoard(BoardDto BoardDto) {
-        boardRepository.deleteById(BoardDto.getBoardId());
+    public void deleteBoard(BoardDto boardDto) {
+        boardRepository.deleteById(boardDto.getBoardId());
 
     }
 

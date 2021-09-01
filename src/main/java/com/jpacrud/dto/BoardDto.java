@@ -1,16 +1,15 @@
 package com.jpacrud.dto;
 
 import com.jpacrud.domain.Board;
-import com.jpacrud.domain.Category;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 
-import javax.validation.constraints.NotBlank;
 
-@AllArgsConstructor
-@NoArgsConstructor
+
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 
 public class BoardDto {
@@ -18,7 +17,6 @@ public class BoardDto {
     @NotBlank
     @ApiModelProperty(value = "카테고리 제목")
     private Long categoryId;
-
 
     @ApiModelProperty(value = "게시판 아이디", hidden = true)
     private Long boardId;
@@ -31,11 +29,9 @@ public class BoardDto {
 
 
     @ApiModelProperty(hidden = true)
-    private Category category;
+    private Board board;
 
-
-
-    public BoardDto toEntity(Board board){
+    public BoardDto toEntity(Board board) {
 
         return BoardDto.builder()
                 .category(board.getCategory())
@@ -45,12 +41,6 @@ public class BoardDto {
     }
 
 
-
-
-
-
-
-
-
-
 }
+
+

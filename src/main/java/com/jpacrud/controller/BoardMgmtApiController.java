@@ -1,14 +1,13 @@
 package com.jpacrud.controller;
 
 import com.jpacrud.dto.BoardDto;
-import com.jpacrud.dto.BoardReplyDto;
-import com.jpacrud.dto.response.BoardResponseDto;
-import com.jpacrud.service.BoardMgmtService;
+import com.jpacrud.dto.BoardPostReplyDto;
+import com.jpacrud.dto.PostDto;
+import com.jpacrud.service.BoardPostService;
+import com.jpacrud.service.BoardService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

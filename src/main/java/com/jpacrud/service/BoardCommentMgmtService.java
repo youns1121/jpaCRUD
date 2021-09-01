@@ -7,6 +7,7 @@ import com.jpacrud.repository.BoardCommentRepository;
 import com.jpacrud.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.NoSuchElementException;
 
@@ -26,7 +27,7 @@ public class BoardCommentMgmtService {
     public Long createBoardComment(BoardCommentDto boardCommentDto) {
 
         Board board = boardRepository.findById(boardCommentDto.getBoardId()).orElseThrow(()->
-                 new NoSuchElementException("BoardId not found"));
+                 new NoSuchElementException("boardId not found"));
         boardCommentDto.setBoard(board);
 
         BoardComment boardComment = new BoardComment();
