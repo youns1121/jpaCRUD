@@ -21,10 +21,10 @@ public class Category extends BaseDateEntity { //게시판
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Category_id")
+    @Column(name = "category_id")
     private Long categoryId;
 
-    @Column(name = "Category_name")
+    @Column(name = "category_name")
     private String categoryName;
 
 

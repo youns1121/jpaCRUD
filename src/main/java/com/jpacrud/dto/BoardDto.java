@@ -16,7 +16,7 @@ import lombok.*;
 public class BoardDto {
 
 
-    @ApiModelProperty(value = "카테고리 제목")
+    @ApiModelProperty(value = "카테고리 아이디")
     private Long categoryId;
 
     @ApiModelProperty(value = "게시판 아이디", hidden = true)
@@ -28,6 +28,7 @@ public class BoardDto {
     @ApiModelProperty(value = "게시판 내용")
     private String boardContent;
 
+    @ApiModelProperty(hidden = true)
     private Category category;
 
     @ApiModelProperty(hidden = true)

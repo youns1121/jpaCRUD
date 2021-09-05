@@ -5,7 +5,8 @@ import com.jpacrud.domain.BoardReply;
 import com.jpacrud.domain.Category;
 import com.jpacrud.dto.BoardDto;
 import com.jpacrud.dto.BoardReplyDto;
-import com.jpacrud.dto.response.BoardResponseDto;
+import com.jpacrud.dto.request.BoardListRequestDto;
+import com.jpacrud.dto.response.BoardListResponseDto;
 import com.jpacrud.repository.BoardReplyRepository;
 import com.jpacrud.repository.BoardRepository;
 import com.jpacrud.repository.CategoryRepository;
@@ -99,11 +100,10 @@ public class BoardMgmtService {
      */
 
     @Transactional(readOnly = true)
-    public Page<BoardResponseDto> getBoardList(Pageable pageable){
+    public Page<BoardListResponseDto> getBoardList(BoardListRequestDto requestDto, Pageable pageable){
 
-        Page<Board> boards = boardRepository.findAll(pageable);
-        BoardResponseDto boardResponseDto = new BoardResponseDto();
-        return boards.map(boardResponseDto::toEntity);
+        return boardRepository.searchBoardList(requestDto, pageable);
+
     }
 
 

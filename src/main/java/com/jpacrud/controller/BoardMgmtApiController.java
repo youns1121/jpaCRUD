@@ -3,6 +3,8 @@ package com.jpacrud.controller;
 import com.jpacrud.dto.BoardDto;
 
 import com.jpacrud.dto.BoardReplyDto;
+import com.jpacrud.dto.request.BoardListRequestDto;
+import com.jpacrud.dto.response.BoardListResponseDto;
 import com.jpacrud.dto.response.BoardResponseDto;
 import com.jpacrud.service.BoardMgmtService;
 import io.swagger.annotations.Api;
@@ -62,10 +64,11 @@ public class BoardMgmtApiController {
      */
     @ApiOperation(value = "게시판 전체 조회", notes = "게시판 전체를 조회합니다.")
     @GetMapping("/selectBoard")
-    public  ResponseEntity<Page<BoardResponseDto>> getBoardList(Pageable pageable){
+    public  ResponseEntity<Page<BoardResponseDto>> getBoardList(BoardListRequestDto requestDto, Pageable pageable){
 
-        Page<BoardResponseDto> boardResponseDtos = boardMgmtService.getBoardList(pageable);
+        Page<BoardListResponseDto> boardList = boardMgmtService.getBoardList(requestDto, pageable);
+        return (ResponseEntity<Page<BoardResponseDto>>) boardList;
 
-        return ResponseEntity.ok(boardResponseDtos);
+
     }
 }
