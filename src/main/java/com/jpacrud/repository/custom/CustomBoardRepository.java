@@ -7,10 +7,15 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 
 @Repository
 public interface CustomBoardRepository {
 
-    Page<BoardListResponseDto> searchBoardList(BoardListRequestDto requestDto, Pageable pageable);
+    Page<BoardListResponseDto> searchPageList(BoardListRequestDto requestDto, Pageable pageable);
+
+    List<BoardListResponseDto> searchSimpleList(BoardListRequestDto requestDto);
+
 
 }

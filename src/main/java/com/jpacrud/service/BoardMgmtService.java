@@ -16,6 +16,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 
@@ -94,16 +95,30 @@ public class BoardMgmtService {
     }
 
     /**
-     * 전체 카테고리 게시글 리스트 조회
+     * 카테고리별 게시글 리스트 조회
      * @param
      * @return
      */
 
     @Transactional(readOnly = true)
-    public Page<BoardListResponseDto> getBoardList(BoardListRequestDto requestDto, Pageable pageable){
+    public List<BoardListResponseDto> searchSimpleList(BoardListRequestDto requestDto){
 
-        return boardRepository.searchBoardList(requestDto, pageable);
+        return boardRepository.searchSimpleList(requestDto);
 
+    }
+
+    /**
+     * 카테고리별 게시글 페이징 조회
+     * @param requestDto
+     * @param pageable
+     * @return
+     */
+    @Transactional(readOnly = true)
+    public Page<BoardListResponseDto> searchPageList(BoardListRequestDto requestDto, Pageable pageable){
+
+        Page<BoardListResponseDto> boardListResponseDtos = boardRepository.searchPageList(requestDto, pageable);
+
+        return boardListResponseDtos;
     }
 
 

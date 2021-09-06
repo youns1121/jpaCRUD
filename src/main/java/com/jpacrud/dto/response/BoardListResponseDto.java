@@ -16,8 +16,6 @@ import java.util.List;
 @Getter
 @Setter
 
-@NoArgsConstructor
-@Builder
 public class BoardListResponseDto {
 
 
@@ -25,21 +23,26 @@ public class BoardListResponseDto {
     private Long categoryId;
 
     @ApiModelProperty(value = "카테고리 이름")
-    private Long categoryName;
+    private String categoryName;
 
-    @ApiModelProperty(value = "게시판 아이디", example = "0")
-    private Long boardId;
+
 
     @ApiModelProperty(value = "게시판 제목")
     private String boardTitle;
 
-    @QueryProjection
+    @ApiModelProperty(value = "게시판 생성시간")
+    private LocalDateTime createDate;
 
-    public BoardListResponseDto(Long categoryId, Long categoryName, Long boardId, String boardTitle) {
+    @ApiModelProperty(value = "게시판 수정시간")
+    private LocalDateTime modifyDate;
+
+    @QueryProjection
+    public BoardListResponseDto(Long categoryId, String categoryName, String boardTitle, LocalDateTime createDate, LocalDateTime modifyDate) {
         this.categoryId = categoryId;
         this.categoryName = categoryName;
-        this.boardId = boardId;
         this.boardTitle = boardTitle;
+        this.createDate = createDate;
+        this.modifyDate = modifyDate;
     }
 
     //    public BoardListDto toEntity(Pageable pageable){
