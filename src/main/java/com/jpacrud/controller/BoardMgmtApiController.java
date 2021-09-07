@@ -54,11 +54,13 @@ public class BoardMgmtApiController {
     }
 
     @ApiOperation(value = "게시판 삭제", notes = "게시판을 삭제합니다.")
-    @DeleteMapping("/deleteBoard/{boardId}")
+    @PostMapping("/deleteBoard")
     public void deleteBoard (@RequestBody BoardDto boardDto) {
 
-        boardMgmtService.deleteBoard(boardDto);
+//        boardMgmtService.deleteBoard(boardDto);
     }
+
+
 
     /**
      * 카테고리별 게시판 조회
@@ -80,9 +82,37 @@ public class BoardMgmtApiController {
     @GetMapping("/searchPageBoard")
     public Page<BoardListResponseDto> getBoardPage(BoardListRequestDto requestDto, Pageable pageable){
 
-        Page<BoardListResponseDto> boardList = boardMgmtService.searchPageList(requestDto, pageable);
-        return boardList;
+        Page<BoardListResponseDto> boardListResponseDtos = boardMgmtService.searchPageList(requestDto, pageable);
+        return boardListResponseDtos;
     }
+
+
+    /**
+     * 카테고리별 게시판 페이징 Complex
+     */
+
+    @ApiOperation(value = "카테고리별 게시판 페이징 Complex", notes = "카테고리별 게시판 페이징 Complex을 조회 합니다.")
+    @GetMapping("/searchPageComplexBoard")
+    public Page<BoardListResponseDto> getBoardComplexBoard(BoardListRequestDto requestDto, Pageable pageable){
+
+        Page<BoardListResponseDto> boardListResponseDtos = boardMgmtService.searchPageComplex(requestDto, pageable);
+
+        return boardListResponseDtos;
+    }
+
+    /**
+     * 카테고리별 게시판 페이징 Complex_v2
+     */
+
+    @ApiOperation(value = "카테고리별 게시판 페이징 Complex_v2", notes = "카테고리별 게시판 페이징 Complex_v2을 조회 합니다.")
+    @GetMapping("/searchPageComplexV2Board")
+    public Page<BoardListResponseDto> getBoardComplexV2Board(BoardListRequestDto requestDto, Pageable pageable){
+
+        Page<BoardListResponseDto> boardListResponseDtos = boardMgmtService.searchPageComplexV2(requestDto, pageable);
+
+        return boardListResponseDtos;
+    }
+
 
 
 }

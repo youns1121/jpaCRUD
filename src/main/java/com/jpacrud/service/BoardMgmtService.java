@@ -70,8 +70,8 @@ public class BoardMgmtService {
      * 게시판 삭제하기
      */
     @Transactional
-    public void deleteBoard(BoardDto boardDto) {
-        boardRepository.deleteById(boardDto.getBoardId());
+    public void deleteBoard(Long boardId) {
+//        Long boardRepository.deleteById(boardId);
 
     }
 
@@ -117,6 +117,29 @@ public class BoardMgmtService {
     public Page<BoardListResponseDto> searchPageList(BoardListRequestDto requestDto, Pageable pageable){
 
         Page<BoardListResponseDto> boardListResponseDtos = boardRepository.searchPageList(requestDto, pageable);
+
+        return boardListResponseDtos;
+    }
+
+    /**
+     * 카테고리별 게시판 페이징 Complex 조회
+     * @param requestDto
+     * @param pageable
+     * @return
+     */
+    @Transactional(readOnly = true)
+    public Page<BoardListResponseDto> searchPageComplex(BoardListRequestDto requestDto, Pageable pageable){
+
+        Page<BoardListResponseDto> boardListResponseDtos = boardRepository.searchPageComplex(requestDto, pageable);
+
+        return boardListResponseDtos;
+
+    }
+
+    @Transactional(readOnly = true)
+    public Page<BoardListResponseDto> searchPageComplexV2(BoardListRequestDto requestDto, Pageable pageable){
+
+        Page<BoardListResponseDto> boardListResponseDtos = boardRepository.searchPageComplex_v2(requestDto, pageable);
 
         return boardListResponseDtos;
     }
