@@ -1,6 +1,7 @@
 package com.jpacrud.domain;
 
 import com.jpacrud.domain.common.BaseDateEntity;
+import com.jpacrud.domain.common.BaseEntity;
 import com.jpacrud.dto.CategoryDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,7 +18,7 @@ import java.util.List;
 @Builder
 @Entity
 @Table(name="category")
-public class Category extends BaseDateEntity { //게시판
+public class Category extends BaseEntity { //게시판
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

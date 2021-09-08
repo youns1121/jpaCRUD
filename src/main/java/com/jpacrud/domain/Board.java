@@ -1,6 +1,6 @@
 package com.jpacrud.domain;
 
-import com.jpacrud.domain.common.BaseDateEntity;
+import com.jpacrud.domain.common.BaseEntity;
 import com.jpacrud.dto.BoardDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,7 +17,7 @@ import java.util.List;
 @Getter
 @Table(name = "board")
 @Entity
-public class Board extends BaseDateEntity {
+public class Board extends BaseEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "board_id")

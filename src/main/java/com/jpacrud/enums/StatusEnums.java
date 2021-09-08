@@ -17,19 +17,18 @@ public enum StatusEnums {
 
         private int statusCode;
         private String statusMsg;
-
-
     }
 
     @Getter
     @AllArgsConstructor
     public enum UserRole {
 
-        USER_NONE("일반사용자"),
-        BOARD_ADMIN("게시판관리자"),
-        SYSTEM_ADMIN("시스템관리자")
+        SYSTEM_ADMIN(0, "시스템관리자"),
+        BOARD_ADMIN(1, "게시판관리자"),
+        USER_NONE(2, "일반사용자"),
         ;
 
+        private int statusCode;
         private String statusMsg;
 
 

@@ -4,13 +4,13 @@ import com.jpacrud.domain.Board;
 import com.jpacrud.domain.QBoard;
 import com.jpacrud.domain.QCategory;
 import com.jpacrud.dto.BoardDto;
-import com.jpacrud.dto.QBoardDto;
 import com.jpacrud.dto.request.BoardListRequestDto;
 import com.jpacrud.dto.response.BoardListResponseDto;
 import com.jpacrud.dto.response.QBoardListResponseDto;
 import com.jpacrud.repository.custom.CustomBoardRepository;
 
 import com.querydsl.core.QueryResults;
+import com.querydsl.core.types.Predicate;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -52,6 +52,12 @@ public class BoardRepositoryImpl implements CustomBoardRepository {
                 .fetch();
     }
 
+    /**
+     * Querydsl이 제공하는 fetchResults() 를 사용하면 내용과 전체 카운트를 한번에 조회할 수 있다.(실제
+     * 쿼리는 2번 호출)
+     * fetchResult() 는 카운트 쿼리 실행시 필요없는 order by 는 제거한다
+     */
+
     @Override
     public Page<BoardListResponseDto> searchPageList(BoardListRequestDto requestDto, Pageable pageable) {
 
@@ -80,6 +86,9 @@ public class BoardRepositoryImpl implements CustomBoardRepository {
      *     복잡한 페이징
      *     데이터 조회 쿼리와, 전체 카운트 쿼리를 분리
      *     데이터 내용과 전체 카운트를 별도로 조회하는 방법
+     *     전체 카운트를 조회 하는 방법을 최적화 할 수 있으면 이렇게 분리하면 된다. (예를 들어서 전체 카운트를
+     * 조회할 때 조인 쿼리를 줄일 수 있다면 상당한 효과가 있다.)
+     * 코드를 리펙토링해서 내용 쿼리과 전체 카운트 쿼리를 읽기 좋게 분리하면 좋다
      */
     @Override
     public Page<BoardListResponseDto> searchPageComplex(BoardListRequestDto requestDto, Pageable pageable) {
@@ -105,11 +114,14 @@ public class BoardRepositoryImpl implements CustomBoardRepository {
                     .from(QBoard.board)
                     .join(QBoard.board.category, QCategory.category)
                     .where(
-                            categoryNameEq(requestDto.getCategoryName())
+                            categoryNameEq(requestDto.getCategoryName()),
+                            boardTitleEq(requestDto.getBoardTitle())
                     ).fetchCount(); //데이터가 몇천건 있을때 사용
 
         return new PageImpl<>(content, pageable, total);
     }
+
+
 
     /**
      * count 쿼리가 생략 가능한 경우 생략해서 처리
@@ -129,7 +141,8 @@ public class BoardRepositoryImpl implements CustomBoardRepository {
                 .from(QBoard.board)
                 .innerJoin(QBoard.board.category, QCategory.category)
                 .where(
-                        categoryNameEq(requestDto.getCategoryName())
+                        categoryNameEq(requestDto.getCategoryName()),
+                        boardTitleEq(requestDto.getBoardTitle())
                 )
                 .orderBy(QBoard.board.createDate.asc())
                 .offset(pageable.getOffset())
@@ -141,9 +154,9 @@ public class BoardRepositoryImpl implements CustomBoardRepository {
                 .from(QBoard.board)
                 .innerJoin(QBoard.board.category, QCategory.category)
                 .where(
-                        categoryNameEq(requestDto.getCategoryName())
+                        categoryNameEq(requestDto.getCategoryName()),
+                        boardTitleEq(requestDto.getBoardTitle())
                 );
-
 
         return PageableExecutionUtils.getPage(content, pageable, () -> countQuery.fetchCount());
     }
@@ -170,7 +183,12 @@ public class BoardRepositoryImpl implements CustomBoardRepository {
 
     private BooleanExpression categoryNameEq(String categoryName) {
         return StringUtils.hasText(categoryName) ? QCategory.category.categoryName.eq(categoryName) : null;
-    } //공백, null 체크
+    } //문자열(String) 값 여부  : 공백, null 체크
+
+    private Predicate boardTitleEq(String boardTitle) {
+
+        return StringUtils.hasText(boardTitle) ? QBoard.board.boardTitle.eq(boardTitle) : null;
+    }
 
 
 }
