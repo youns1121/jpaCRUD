@@ -2,6 +2,7 @@ package com.jpacrud.domain;
 
 import com.jpacrud.domain.common.BaseEntity;
 import com.jpacrud.dto.BoardDto;
+import com.jpacrud.enums.StatusEnums;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -41,15 +42,17 @@ public class Board extends BaseEntity {
     /**
      * 게시판 생성 로직
      */
-
-    public void createBoard(BoardDto boardDto){
+    public void createBoard(BoardDto boardDto) {
 
         this.category = boardDto.getCategory();
         this.boardTitle = boardDto.getBoardTitle();
         this.boardContent = boardDto.getBoardContent();
-
-
     }
+
+
+
+
+
 
     /**
      * 댓글 생성 로직

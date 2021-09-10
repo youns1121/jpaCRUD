@@ -2,6 +2,7 @@ package com.jpacrud.dto.response;
 
 import com.jpacrud.domain.Board;
 import com.jpacrud.domain.BoardComment;
+import com.jpacrud.enums.StatusEnums;
 import com.querydsl.core.annotations.QueryProjection;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
@@ -35,6 +36,9 @@ public class BoardListResponseDto {
 
     @ApiModelProperty(value = "게시판 수정시간")
     private LocalDateTime modifyDate;
+
+    @ApiModelProperty(value = "플래그 상태값")
+    StatusEnums.FlagStatus flagStatus;
 
     @QueryProjection
     public BoardListResponseDto(Long categoryId, String categoryName, String boardTitle, LocalDateTime createDate, LocalDateTime modifyDate) {

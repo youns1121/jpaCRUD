@@ -9,6 +9,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.Column;
 import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
+import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
@@ -17,7 +18,7 @@ import javax.persistence.MappedSuperclass;
 public abstract class BaseEntity extends BaseDateEntity {
 
     @NotAudited
-    @Column(nullable = false, name = "del_yn")
-    @ColumnDefault("'N'")
+    @NotNull
+    @Column(name = "del_yn")
     private String delYn = "N";
 }

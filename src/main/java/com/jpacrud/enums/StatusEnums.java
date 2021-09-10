@@ -11,8 +11,8 @@ public enum StatusEnums {
     @AllArgsConstructor
     public enum FlagStatus{
 
-        FLAG_Y(1, "성공"),
-        FLAG_N(0, "실패")
+        FLAG_Y(1, "Y"),
+        FLAG_N(0, "N")
         ;
 
         private int statusCode;

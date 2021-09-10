@@ -15,5 +15,9 @@ public class BoardListRequestDto {
     @ApiModelProperty(value = "게시판 제목")
     private String boardTitle;
 
+    @ApiModelProperty(value = "삭제여부")
+    private String delYn;
+
+
 
 }
