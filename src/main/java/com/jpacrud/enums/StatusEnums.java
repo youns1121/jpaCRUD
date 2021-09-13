@@ -7,6 +7,8 @@ import lombok.Getter;
 public enum StatusEnums {
     ;
 
+
+
     @Getter
     @AllArgsConstructor
     public enum FlagStatus{
@@ -30,7 +32,7 @@ public enum StatusEnums {
 
         private int statusCode;
         private String statusMsg;
-
-
     }
+
+
 }

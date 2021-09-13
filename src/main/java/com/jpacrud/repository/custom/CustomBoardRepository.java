@@ -1,7 +1,5 @@
 package com.jpacrud.repository.custom;
 
-import com.jpacrud.domain.Board;
-import com.jpacrud.dto.BoardDto;
 import com.jpacrud.dto.request.BoardListRequestDto;
 import com.jpacrud.dto.response.BoardListResponseDto;
 import org.springframework.data.domain.Page;

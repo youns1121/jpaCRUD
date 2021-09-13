@@ -38,9 +38,9 @@ public class BoardMgmtService {
     public Long createBoard(BoardDto boardDto){
 
 
-        Category category = categoryRepository.findById(boardDto.getCategoryId()).orElseThrow(() -> new NoSuchElementException("categoryId not found"));
+//        Category category = categoryRepository.findById(boardDto.getCategoryId()).orElseThrow(() -> new NoSuchElementException("categoryId not found"));
 
-        boardDto.setCategory(category);
+//        boardDto.setCategory(category);
 
         Board board = new Board();
 
@@ -70,8 +70,18 @@ public class BoardMgmtService {
      * 게시판 삭제하기
      */
     @Transactional
-    public void deleteBoard(Long boardId) {
-//        Long boardRepository.deleteById(boardId);
+    public Long deleteBoard(BoardDto boardDto) {
+        Board board = boardRepository.findById(boardDto.getBoardId()).orElseThrow(()->
+                new NoSuchElementException("BoardId not found"));
+
+
+        board.setDelYn("Y");
+
+
+        return boardRepository.save(board).getBoardId();
+
+
+
 
     }
 

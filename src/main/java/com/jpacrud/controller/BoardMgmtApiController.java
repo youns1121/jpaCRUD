@@ -54,10 +54,10 @@ public class BoardMgmtApiController {
     }
 
     @ApiOperation(value = "게시판 삭제", notes = "게시판을 삭제합니다.")
-    @PostMapping("/deleteBoard")
+    @PostMapping("/deleteBoard/{boardId}")
     public void deleteBoard (@RequestBody BoardDto boardDto) {
 
-//        boardMgmtService.deleteBoard(boardDto);
+        boardMgmtService.deleteBoard(boardDto);
     }
 
 
@@ -79,7 +79,7 @@ public class BoardMgmtApiController {
      * @return
      */
     @ApiOperation(value = "카테고리별  게시판 페이징 조회", notes = "카테고리별 게시판 페이징 조회 합니다.")
-    @GetMapping("/searchPageBoard")
+    @GetMapping("/searchPageList")
     public Page<BoardListResponseDto> getBoardPage(BoardListRequestDto requestDto, Pageable pageable){
 
         Page<BoardListResponseDto> boardListResponseDtos = boardMgmtService.searchPageList(requestDto, pageable);

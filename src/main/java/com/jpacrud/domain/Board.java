@@ -1,12 +1,15 @@
 package com.jpacrud.domain;
 
+import com.jpacrud.domain.common.BaseDateEntity;
 import com.jpacrud.domain.common.BaseEntity;
 import com.jpacrud.dto.BoardDto;
+import com.jpacrud.enums.BoardEnums;
 import com.jpacrud.enums.StatusEnums;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -39,14 +42,24 @@ public class Board extends BaseEntity {
     private List<BoardReply> boardReplyList = new ArrayList<>();
 
 
+    private BoardEnums.BoardCategory boardCategory;
+
+
+
+
     /**
      * 게시판 생성 로직
      */
     public void createBoard(BoardDto boardDto) {
 
-        this.category = boardDto.getCategory();
+        this.boardCategory = boardDto.getBoardCategory();
         this.boardTitle = boardDto.getBoardTitle();
         this.boardContent = boardDto.getBoardContent();
+    }
+
+    public void deleteBoard(BoardDto boardDto){
+
+
     }
 
 

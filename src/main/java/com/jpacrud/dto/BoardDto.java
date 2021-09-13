@@ -2,6 +2,7 @@ package com.jpacrud.dto;
 
 import com.jpacrud.domain.Board;
 import com.jpacrud.domain.Category;
+import com.jpacrud.enums.BoardEnums;
 import com.jpacrud.enums.StatusEnums;
 import com.querydsl.core.annotations.QueryProjection;
 import io.swagger.annotations.ApiModelProperty;
@@ -22,7 +23,7 @@ public class BoardDto {
     @ApiModelProperty(value = "카테고리 아이디")
     private Long categoryId;
 
-    @ApiModelProperty(value = "게시판 아이디", hidden = true)
+    @ApiModelProperty(value = "게시판 아이디")
     private Long boardId;
 
     @ApiModelProperty(value = "게시판 제목")
@@ -43,14 +44,18 @@ public class BoardDto {
     @ApiModelProperty(value = "게시판 수정시간", hidden = true)
     private LocalDateTime modifyDate;
 
+
+    @ApiModelProperty(value = "삭제여부", hidden = true)
+    private String delYn;
+
+
     @ApiModelProperty(value = "상태값", hidden = true)
     private StatusEnums.FlagStatus flagStatus;
 
+    private BoardEnums.BoardCategory boardCategory;
+
+
 //    @QueryProjection
-
-
-
-
     public BoardDto toEntity(Board board) {
 
         return BoardDto.builder()

@@ -3,15 +3,15 @@ package com.jpacrud.repository;
 import com.jpacrud.domain.Board;
 import com.jpacrud.domain.QBoard;
 import com.jpacrud.domain.QCategory;
-import com.jpacrud.dto.BoardDto;
+
+
 import com.jpacrud.dto.request.BoardListRequestDto;
 import com.jpacrud.dto.response.BoardListResponseDto;
 import com.jpacrud.dto.response.QBoardListResponseDto;
-import com.jpacrud.enums.StatusEnums;
 import com.jpacrud.repository.custom.CustomBoardRepository;
 
+
 import com.querydsl.core.QueryResults;
-import com.querydsl.core.types.Predicate;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -24,6 +24,7 @@ import org.springframework.util.StringUtils;
 
 import javax.persistence.EntityManager;
 import java.util.List;
+
 
 public class BoardRepositoryImpl implements CustomBoardRepository {
 
@@ -45,8 +46,6 @@ public class BoardRepositoryImpl implements CustomBoardRepository {
                         QBoard.board.boardTitle.as("boardTitle"),
                         QBoard.board.createDate.as("createDate"),
                         QBoard.board.modifyDate.as("modifyDate")
-
-
                 ))
                 .from(QBoard.board)
                 .innerJoin(QBoard.board.category, QCategory.category)
@@ -76,7 +75,12 @@ public class BoardRepositoryImpl implements CustomBoardRepository {
                 .from(QBoard.board)
                 .innerJoin(QBoard.board.category, QCategory.category)
 
-                .where(categoryNameEq(requestDto.getCategoryName()))
+                .where(
+                        delYnEq(requestDto.getDelYn())
+
+                )
+                .orderBy(QBoard.board.boardId.desc())
+
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
                 .fetchResults();
@@ -132,6 +136,7 @@ public class BoardRepositoryImpl implements CustomBoardRepository {
      * count 쿼리가 생략 가능한 경우 생략해서 처리
      * 페이지 시작이면서 컨텐츠 사이즈보다 작을때
      * 마지막 페이지 일 때(offset + 컨텐츠 사이즈를 더해서 전체 사이즈 구함)
+     * @return
      */
     @Override
     public Page<BoardListResponseDto> searchPageComplex_v2(BoardListRequestDto requestDto, Pageable pageable) {
@@ -146,8 +151,8 @@ public class BoardRepositoryImpl implements CustomBoardRepository {
                 .from(QBoard.board)
                 .innerJoin(QBoard.board.category, QCategory.category)
                 .where(
-                        categoryNameEq(requestDto.getCategoryName()),
-                        boardTitleEq(requestDto.getBoardTitle()),
+/*                        categoryNameEq(requestDto.getCategoryName()),
+                        boardTitleEq(requestDto.getBoardTitle()),*/
                         delYnEq(requestDto.getDelYn())
                     )
                 .orderBy(QBoard.board.createDate.asc())
@@ -155,14 +160,15 @@ public class BoardRepositoryImpl implements CustomBoardRepository {
                 .limit(pageable.getPageSize())
                 .fetch(); //콘텐츠쿼리 두번 날림
 
-        JPAQuery<Board> countQuery = jpaQueryFactory
+        JPAQuery<Board> countQuery = jpaQueryFactory  // 카운트 쿼리
                 .select(QBoard.board)
                 .from(QBoard.board)
                 .innerJoin(QBoard.board.category, QCategory.category)
                 .where(
-                        categoryNameEq(requestDto.getCategoryName()),
-                        boardTitleEq(requestDto.getBoardTitle()),
+/*                        categoryNameEq(requestDto.getCategoryName()),
+                        boardTitleEq(requestDto.getBoardTitle()),*/
                         delYnEq(requestDto.getDelYn())
+
 
 
                 );
@@ -172,25 +178,6 @@ public class BoardRepositoryImpl implements CustomBoardRepository {
 
 
 
-
-//    //게시판 삭제 queryDSL
-//    @Override
-//    public Long deleteBoard(BoardDto boardDto) {
-//        return jpaQueryFactory
-//                .select(new QBoardDto(
-//                        QCategory.category.categoryId.as("cateogryId"),
-//                        QBoard.board.boardTitle.as("boardTitle"),
-//                        QBoard.board.createDate.as("createDate"),
-//                        QBoard.board.modifyDate.as("modifyDate"))
-//
-//
-//
-//                .from(QBoard.board)
-//                .innerJoin(QBoard.board.category, QCategory.category)
-//
-//                .where(categoryIdEq(requestDto.getCategoryName()))
-//                .fetchOne();
-//    }
 
     private BooleanExpression categoryNameEq(String categoryName) {
         return StringUtils.hasText(categoryName) ? QCategory.category.categoryName.eq(categoryName) : null;
@@ -203,8 +190,9 @@ public class BoardRepositoryImpl implements CustomBoardRepository {
 
     private BooleanExpression delYnEq(String delYn) {
 
-        return StringUtils.hasText(delYn) ? QBoard.board.delYn.eq(delYn) : null;
+        return StringUtils.hasText(delYn = "N") ? QBoard.board.delYn.eq(delYn) : null;
     }
+
 
 
 }

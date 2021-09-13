@@ -1,5 +1,6 @@
 package com.jpacrud.dto.request;
 
+import com.jpacrud.enums.Mapper.EnumMapperValue;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,6 +18,9 @@ public class BoardListRequestDto {
 
     @ApiModelProperty(value = "삭제여부")
     private String delYn;
+
+    @ApiModelProperty(hidden = true)
+    private EnumMapperValue enumMapperValue;
 
 
 
