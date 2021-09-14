@@ -34,14 +34,14 @@ public class Board extends BaseEntity {
     private String boardContent;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-    @JoinColumn(name="category_id")
-    private Category category;
+    @JoinColumn(name="id")
+    private Member member;
 
-    @Builder.Default
     @OneToMany(mappedBy = "board")
     private List<BoardReply> boardReplyList = new ArrayList<>();
 
 
+    @Column(name = "board_category")
     private BoardEnums.BoardCategory boardCategory;
 
 

@@ -2,14 +2,12 @@ package com.jpacrud.service;
 
 import com.jpacrud.domain.Board;
 import com.jpacrud.domain.BoardReply;
-import com.jpacrud.domain.Category;
 import com.jpacrud.dto.BoardDto;
 import com.jpacrud.dto.BoardReplyDto;
 import com.jpacrud.dto.request.BoardListRequestDto;
 import com.jpacrud.dto.response.BoardListResponseDto;
 import com.jpacrud.repository.BoardReplyRepository;
 import com.jpacrud.repository.BoardRepository;
-import com.jpacrud.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -25,7 +23,6 @@ import java.util.NoSuchElementException;
 public class BoardMgmtService {
 
     private final BoardRepository boardRepository;
-    private final CategoryRepository categoryRepository;
     private final BoardReplyRepository boardReplyRepository;
 
 

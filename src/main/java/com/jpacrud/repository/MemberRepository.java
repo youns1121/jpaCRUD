@@ -1,0 +1,10 @@
+package com.jpacrud.repository;
+
+import com.jpacrud.domain.Member;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+
+public interface MemberRepository extends JpaRepository<Member, Long> {
+
+
+}

@@ -24,21 +24,34 @@ repositories {
 }
 
     dependencies {
+
+
+
         implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
         implementation group: 'org.springframework.boot', name: 'spring-boot-devtools', version: '2.5.1'
         implementation 'org.springframework.boot:spring-boot-starter-web'
         implementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: '2.5.2'
         implementation 'org.projectlombok:lombok:1.18.18'
+        implementation 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
 
+
+
+        //MapStruct
+        implementation 'org.mapstruct:mapstruct:1.4.2.Final'
+        annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.2.Final'
 
         // 타임리프 추가
         implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 
         // Spring Security
-        implementation 'org.springframework.boot:spring-boot-starter-web'
-        implementation 'org.springframework.boot:spring-boot-starter-security'
-        implementation 'org.springframework.security:spring-security-test'
-        testImplementation('org.springframework.boot:spring-boot-starter-test')
+
+        // ModelMapper
+        implementation 'org.modelmapper:modelmapper'
+
+
+
+
+
 
 
         compileOnly 'org.projectlombok:lombok'

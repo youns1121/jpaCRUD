@@ -1,7 +1,6 @@
 package com.jpacrud.dto.response;
 
 import com.jpacrud.domain.Board;
-import com.jpacrud.domain.Category;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 
@@ -13,11 +12,6 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Builder
 public class BoardResponseDto {
-
-    @ApiModelProperty(value = "카테고리 아이디")
-    private Long categoryId;
-    @ApiModelProperty(value = "카테고리 이름")
-    String categoryName;
 
     @ApiModelProperty(value = "게시판 아이디", example = "0", required = true)
     private Long boardId;
@@ -36,8 +30,6 @@ public class BoardResponseDto {
                 .boardId(board.getBoardId())
                 .boardTitle(board.getBoardTitle())
                 .createDate(board.getCreateDate())
-                .categoryId(board.getCategory().getCategoryId())
-                .categoryName(board.getCategory().getCategoryName())
                 .build();
     }
 }

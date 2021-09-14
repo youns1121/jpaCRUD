@@ -10,8 +10,7 @@ import lombok.Setter;
 public class BoardListRequestDto {
 
 
-    @ApiModelProperty(value = "카테고리 이름")
-    private String categoryName;
+
 
     @ApiModelProperty(value = "게시판 제목")
     private String boardTitle;

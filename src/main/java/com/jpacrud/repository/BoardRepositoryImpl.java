@@ -2,7 +2,6 @@ package com.jpacrud.repository;
 
 import com.jpacrud.domain.Board;
 import com.jpacrud.domain.QBoard;
-import com.jpacrud.domain.QCategory;
 
 
 import com.jpacrud.dto.request.BoardListRequestDto;
@@ -41,16 +40,11 @@ public class BoardRepositoryImpl implements CustomBoardRepository {
     public List<BoardListResponseDto> searchSimpleList(BoardListRequestDto requestDto) {
         return jpaQueryFactory
                 .select(new QBoardListResponseDto(
-                        QCategory.category.categoryId.as("cateogryId"),
-                        QCategory.category.categoryName.as("categoryName"),
                         QBoard.board.boardTitle.as("boardTitle"),
                         QBoard.board.createDate.as("createDate"),
                         QBoard.board.modifyDate.as("modifyDate")
                 ))
                 .from(QBoard.board)
-                .innerJoin(QBoard.board.category, QCategory.category)
-
-                .where(categoryNameEq(requestDto.getCategoryName()))
                 .fetch();
     }
 
@@ -65,15 +59,12 @@ public class BoardRepositoryImpl implements CustomBoardRepository {
 
         QueryResults<BoardListResponseDto> results = jpaQueryFactory
                 .select(new QBoardListResponseDto(
-                        QCategory.category.categoryId,
-                        QCategory.category.categoryName,
                         QBoard.board.boardTitle,
                         QBoard.board.createDate,
                         QBoard.board.modifyDate
 
                 ))
                 .from(QBoard.board)
-                .innerJoin(QBoard.board.category, QCategory.category)
 
                 .where(
                         delYnEq(requestDto.getDelYn())
@@ -102,18 +93,12 @@ public class BoardRepositoryImpl implements CustomBoardRepository {
     public Page<BoardListResponseDto> searchPageComplex(BoardListRequestDto requestDto, Pageable pageable) {
         List<BoardListResponseDto> content = jpaQueryFactory
                 .select(new QBoardListResponseDto(
-                        QCategory.category.categoryId,
-                        QCategory.category.categoryName,
                         QBoard.board.boardTitle,
                         QBoard.board.createDate,
                         QBoard.board.modifyDate
 
                 ))
                 .from(QBoard.board)
-                .innerJoin(QBoard.board.category, QCategory.category)
-                .where(
-                        categoryNameEq(requestDto.getCategoryName())
-                )
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
                 .fetch(); //콘텐츠쿼리 두번 날림
@@ -121,9 +106,7 @@ public class BoardRepositoryImpl implements CustomBoardRepository {
             long total = jpaQueryFactory
                     .select(QBoard.board)
                     .from(QBoard.board)
-                    .join(QBoard.board.category, QCategory.category)
                     .where(
-                            categoryNameEq(requestDto.getCategoryName()),
                             boardTitleEq(requestDto.getBoardTitle())
                     ).fetchCount(); //데이터가 몇천건 있을때 사용
 
@@ -142,14 +125,11 @@ public class BoardRepositoryImpl implements CustomBoardRepository {
     public Page<BoardListResponseDto> searchPageComplex_v2(BoardListRequestDto requestDto, Pageable pageable) {
         List<BoardListResponseDto> content = jpaQueryFactory
                 .select(new QBoardListResponseDto(
-                        QCategory.category.categoryId,
-                        QCategory.category.categoryName,
                         QBoard.board.boardTitle,
                         QBoard.board.createDate,
                         QBoard.board.modifyDate
                 ))
                 .from(QBoard.board)
-                .innerJoin(QBoard.board.category, QCategory.category)
                 .where(
 /*                        categoryNameEq(requestDto.getCategoryName()),
                         boardTitleEq(requestDto.getBoardTitle()),*/
@@ -163,7 +143,6 @@ public class BoardRepositoryImpl implements CustomBoardRepository {
         JPAQuery<Board> countQuery = jpaQueryFactory  // 카운트 쿼리
                 .select(QBoard.board)
                 .from(QBoard.board)
-                .innerJoin(QBoard.board.category, QCategory.category)
                 .where(
 /*                        categoryNameEq(requestDto.getCategoryName()),
                         boardTitleEq(requestDto.getBoardTitle()),*/
@@ -179,9 +158,9 @@ public class BoardRepositoryImpl implements CustomBoardRepository {
 
 
 
-    private BooleanExpression categoryNameEq(String categoryName) {
-        return StringUtils.hasText(categoryName) ? QCategory.category.categoryName.eq(categoryName) : null;
-    } //문자열(String) 값 여부  : 공백, null 체크
+//    private BooleanExpression categoryNameEq(String categoryName) {
+//        return StringUtils.hasText(categoryName) ? QCategory.category.categoryName.eq(categoryName) : null;
+//    } //문자열(String) 값 여부  : 공백, null 체크
 
     private BooleanExpression boardTitleEq(String boardTitle) {
 

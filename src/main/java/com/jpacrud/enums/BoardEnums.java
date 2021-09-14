@@ -31,7 +31,8 @@ public enum BoardEnums {
     public enum BoardCategory implements EnumMapperType{
 
         FREE(0, "자유게시판"),
-        NOTICE(1, "공지사항")
+        NOTICE(1, "공지사항"),
+        QNA(2, "질의응답")
         ;
 
         private int statusCode;
