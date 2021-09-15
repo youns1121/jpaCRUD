@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import static com.jpacrud.enums.StatusEnums.UserRole.USER_NONE;
+
 @RequiredArgsConstructor
 @Service
 public class MemberMgmtService {
@@ -20,12 +22,13 @@ public class MemberMgmtService {
 
 
         Member member = new Member();
+
         member.createUser(memberDto);
 
 //        MemberMapperImpl.INSTANCE.memberDtoToMember(memberDto); // Dto -> Entity 변환
 
 
-        return memberRepository.save(member).getId();
+        return memberRepository.save(member).getSeq();
 
 
     }

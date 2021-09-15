@@ -1,15 +1,12 @@
 package com.jpacrud.domain;
 
-import com.jpacrud.domain.common.BaseDateEntity;
 import com.jpacrud.domain.common.BaseEntity;
 import com.jpacrud.dto.BoardDto;
 import com.jpacrud.enums.BoardEnums;
-import com.jpacrud.enums.StatusEnums;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -34,8 +31,11 @@ public class Board extends BaseEntity {
     private String boardContent;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-    @JoinColumn(name="id")
+    @JoinColumn(name="seq")
     private Member member;
+
+    @OneToMany(mappedBy = "board")
+    private List<Category> categoryList = new ArrayList<>();
 
     @OneToMany(mappedBy = "board")
     private List<BoardReply> boardReplyList = new ArrayList<>();

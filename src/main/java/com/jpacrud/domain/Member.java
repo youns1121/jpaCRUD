@@ -2,14 +2,15 @@ package com.jpacrud.domain;
 
 import com.jpacrud.domain.common.BaseEntity;
 import com.jpacrud.dto.MemberDto;
+
 import com.jpacrud.enums.StatusEnums;
-import com.jpacrud.mapper.MemberMapperImpl;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,8 +23,8 @@ public class Member extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
+    @Column(name = "seq")
+    private Long seq;
 
     @Column(name = "member_id")
     private String memberId;
@@ -46,6 +47,10 @@ public class Member extends BaseEntity {
     @Column(name = "phone")
     private String phone;
 
+    @NotNull
+    @Column(name = "warning")
+    private int warning = 0;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "role")
     private StatusEnums.UserRole userRole;
@@ -54,8 +59,16 @@ public class Member extends BaseEntity {
     private List<Board> boardList = new ArrayList<>();
 
 
+
+    @OneToMany(mappedBy = "member")
+    private List<Category> categoryList = new ArrayList<>();
+
+
+
+
     /**
-     * 유저 생성
+     * 회원가입
+     * 초기 가입은 일반사용자
      */
 
     @Builder
@@ -68,21 +81,6 @@ public class Member extends BaseEntity {
         this.email = memberDto.getEmail();
         this.gender = memberDto.getGender();
         this.phone = memberDto.getPhone();
-        this.userRole = memberDto.getUserRole();
-
+        this.userRole = memberDto.getUserRole().USER_NONE;
     }
-
-
-//    public Member createUserBuilder(MemberDto memberDto){
-//        Member member = Member.builder()
-//
-//                  .memberId(memberDto.getMemberId())
-//                  .build();
-//
-//
-//        return member;
-//
-//
-//    }
-
 }

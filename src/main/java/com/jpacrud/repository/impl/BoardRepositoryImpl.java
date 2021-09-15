@@ -1,4 +1,4 @@
-package com.jpacrud.repository;
+package com.jpacrud.repository.impl;
 
 import com.jpacrud.domain.Board;
 import com.jpacrud.domain.QBoard;

@@ -24,26 +24,19 @@ public enum StatusEnums {
 
     @Getter
     @AllArgsConstructor
-    public enum UserRole implements EnumMapperType {
+    public enum UserRole{
 
-        SYSTEM_ADMIN(0, "시스템관리자"),
-        BOARD_ADMIN(1, "게시판관리자"),
-        USER_NONE(2, "일반사용자"),
+        SYSTEM_ADMIN( "시스템관리자"),
+        BOARD_ADMIN( "게시판관리자"),
+        USER_NONE( "일반사용자"),
+
+
+
         ;
 
 
-        private int statusCode;
         private String statusTitle;
 
-        @Override
-        public int getStatusCode() {
-            return statusCode;
-        }
-
-        @Override
-        public String getStatusTitle() {
-            return statusTitle;
-        }
     }
 
 
