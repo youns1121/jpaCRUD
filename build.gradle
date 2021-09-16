@@ -35,7 +35,6 @@ repositories {
         implementation 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
 
 
-
         //MapStruct
         implementation 'org.mapstruct:mapstruct:1.4.2.Final'
         annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.2.Final'
@@ -43,19 +42,10 @@ repositories {
         // 타임리프 추가
         implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 
-        // Spring Security
+        /* Spring Security */
+        implementation 'org.springframework.boot:spring-boot-starter-security'
+        testImplementation 'org.springframework.security:spring-security-test'
 
-        // ModelMapper
-        implementation 'org.modelmapper:modelmapper'
-
-
-
-
-
-
-
-        compileOnly 'org.projectlombok:lombok'
-        annotationProcessor 'org.projectlombok:lombok'
 
 
         // Swagger 추가
