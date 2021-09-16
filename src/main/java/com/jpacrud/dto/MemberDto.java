@@ -1,7 +1,9 @@
 package com.jpacrud.dto;
 
+import com.jpacrud.domain.Category;
 import com.jpacrud.domain.Member;
 import com.jpacrud.enums.StatusEnums;
+import com.querydsl.core.annotations.QueryProjection;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 
@@ -30,7 +32,7 @@ public class MemberDto {
     private String email;
 
     @ApiModelProperty(value = "성별")
-    private String gender;
+    private StatusEnums.Gender gender;
 
     @ApiModelProperty(value = "연락처")
     private String phone;
@@ -41,6 +43,21 @@ public class MemberDto {
 
     @ApiModelProperty(hidden = true)
     private Member member;
+
+    @ApiModelProperty(hidden = true)
+    private Category category;
+
+    @QueryProjection
+    public MemberDto(StatusEnums.UserRole userRole, Member member, Category category) {
+        this.userRole = userRole;
+        this.member = member;
+        this.category = category;
+    }
+
+
+
+
+
 
 
 

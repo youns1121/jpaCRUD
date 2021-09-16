@@ -1,10 +1,14 @@
 package com.jpacrud.service;
 
+import com.jpacrud.config.auth.SecurityMember;
 import com.jpacrud.domain.Member;
 import com.jpacrud.dto.MemberDto;
 import com.jpacrud.mapper.MemberMapperImpl;
 import com.jpacrud.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,7 +16,7 @@ import static com.jpacrud.enums.StatusEnums.UserRole.USER_NONE;
 
 @RequiredArgsConstructor
 @Service
-public class MemberMgmtService {
+public class MemberMgmtService implements UserDetailsService {
 
     private final MemberRepository memberRepository;
 
@@ -33,4 +37,15 @@ public class MemberMgmtService {
 
     }
 
+    @Override
+    public UserDetails loadUserByUsername(String memberId) throws UsernameNotFoundException {
+
+        Member member = memberRepository.findByMemberId(memberId);
+
+        if(member == null){
+            return null;
+        }
+        else
+            return new SecurityMember(member);
+    }
 }
