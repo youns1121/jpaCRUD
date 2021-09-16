@@ -1,6 +1,7 @@
 package com.jpacrud.domain;
 
 import com.jpacrud.domain.common.BaseEntity;
+import com.jpacrud.dto.CategoryDto;
 import com.jpacrud.dto.MemberDto;
 
 import com.jpacrud.enums.StatusEnums;
@@ -8,6 +9,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -26,6 +28,9 @@ public class Member extends BaseEntity {
     @Column(name = "seq")
     private Long seq;
 
+
+    @NotNull
+    @UniqueElements
     @Column(name = "member_id")
     private String memberId;
 
@@ -41,15 +46,16 @@ public class Member extends BaseEntity {
     @Column(name = "email")
     private String email;
 
-    @Column(name = "gender")
-    private String gender;
-
     @Column(name = "phone")
     private String phone;
 
     @NotNull
-    @Column(name = "warning")
+    @Column(name = "member_warning")
     private int warning = 0;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "gender")
+    private StatusEnums.Gender gender;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "role")
@@ -57,8 +63,6 @@ public class Member extends BaseEntity {
 
     @OneToMany(mappedBy = "member")
     private List<Board> boardList = new ArrayList<>();
-
-
 
     @OneToMany(mappedBy = "member")
     private List<Category> categoryList = new ArrayList<>();
@@ -68,9 +72,8 @@ public class Member extends BaseEntity {
 
     /**
      * 회원가입
-     * 초기 가입은 일반사용자
+     * Default : 일반사용자
      */
-
     @Builder
     public void createUser(MemberDto memberDto){
 
@@ -83,4 +86,11 @@ public class Member extends BaseEntity {
         this.phone = memberDto.getPhone();
         this.userRole = memberDto.getUserRole().USER_NONE;
     }
+
+    /**
+     * 카테고리 권한변경
+     * @return
+     */
+
+
 }
