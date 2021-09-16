@@ -24,16 +24,23 @@ public enum StatusEnums {
 
     @Getter
     @AllArgsConstructor
-    public enum UserRole{
+    public enum UserRole {
 
-        SYSTEM_ADMIN( "시스템관리자"),
-        BOARD_ADMIN( "게시판관리자"),
-        USER_NONE( "일반사용자"),
-
-
-
+        SYSTEM_ADMIN( "시스템 관리자"),
+        CATEGORY_ADMIN( "카테고리 관리자"),
+        USER_NONE( "일반 사용자"),
         ;
 
+        private String statusTitle;
+    }
+
+    @Getter
+    @AllArgsConstructor
+    public enum Gender{
+
+        M("남자"),
+        F("여자"),
+        ;
 
         private String statusTitle;
 
