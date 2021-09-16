@@ -34,8 +34,9 @@ public class Board extends BaseEntity {
     @JoinColumn(name="seq")
     private Member member;
 
-    @OneToMany(mappedBy = "board")
-    private List<Category> categoryList = new ArrayList<>();
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "category_id")
+    private Category category;
 
     @OneToMany(mappedBy = "board")
     private List<BoardReply> boardReplyList = new ArrayList<>();
