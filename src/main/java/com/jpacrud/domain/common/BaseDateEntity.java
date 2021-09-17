@@ -18,10 +18,10 @@ import java.time.LocalDateTime;
 public abstract class BaseDateEntity {
 
     @CreatedDate //생성시간
-    @Column(name = "create_date")
+    @Column(name = "create_date", updatable = false, columnDefinition = "DATETIME(6) comment '등록 일시'" )
     private LocalDateTime createDate;
 
     @LastModifiedDate // 수정시간
-    @Column(name = "modify_date")
+    @Column(name = "modify_date", columnDefinition = "DATETIME(6) comment '수정 일시'")
     private LocalDateTime modifyDate;
 }

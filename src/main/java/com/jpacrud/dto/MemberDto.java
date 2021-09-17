@@ -37,10 +37,6 @@ public class MemberDto {
     @ApiModelProperty(value = "연락처")
     private String phone;
 
-    @ApiModelProperty(value = "사용자권한")
-    private StatusEnums.UserRole userRole;
-
-
     @ApiModelProperty(hidden = true)
     private Member member;
 
@@ -48,8 +44,7 @@ public class MemberDto {
     private Category category;
 
     @QueryProjection
-    public MemberDto(StatusEnums.UserRole userRole, Member member, Category category) {
-        this.userRole = userRole;
+    public MemberDto(Member member, Category category) {
         this.member = member;
         this.category = category;
     }

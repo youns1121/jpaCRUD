@@ -28,7 +28,6 @@ public class BoardResponseDto {
     public BoardResponseDto toEntity(Board board){
         return BoardResponseDto.builder()
                 .boardId(board.getBoardId())
-                .boardTitle(board.getBoardTitle())
                 .createDate(board.getCreateDate())
                 .build();
     }

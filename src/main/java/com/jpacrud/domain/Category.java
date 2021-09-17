@@ -20,7 +20,7 @@ import java.util.List;
 public class Category extends BaseEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "cateogry_id")
+    @Column(name = "category_id", columnDefinition = "BIGINT unsigned comment '카테고리 아이디'")
     private Long categoryId;
 
     @Column(name = "category_name")
@@ -29,10 +29,6 @@ public class Category extends BaseEntity {
     @Column(name = "category_comment")
     private String categoryComment;
 
-    @NotNull
-    @Column(name = "use_yn")
-    private String useYn = "Y";
-
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "admin_seq")
     private Member member;
@@ -40,8 +36,10 @@ public class Category extends BaseEntity {
     @OneToMany(mappedBy = "category")
     private List<Subscribe> subscribeList = new ArrayList<>();
 
-    @OneToMany(mappedBy = "category")
-    private List<Board> boardList = new ArrayList<>();
+//    @OneToMany(mappedBy = "category")
+//    private List<Board> boardList = new ArrayList<>();
+
+
 
     /**
      * 카테고리 생성

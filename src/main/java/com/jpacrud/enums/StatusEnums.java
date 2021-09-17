@@ -1,6 +1,6 @@
 package com.jpacrud.enums;
 
-import com.jpacrud.enums.Mapper.EnumMapperType;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -26,9 +26,10 @@ public enum StatusEnums {
     @AllArgsConstructor
     public enum UserRole {
 
+        NONE("권한없음"),
         SYSTEM_ADMIN( "시스템 관리자"),
         CATEGORY_ADMIN( "카테고리 관리자"),
-        USER_NONE( "일반 사용자"),
+        DEFAULT_USER( "일반 사용자"),
         ;
 
         private String statusTitle;
@@ -43,7 +44,18 @@ public enum StatusEnums {
         ;
 
         private String statusTitle;
+    }
 
+    @Getter
+    @AllArgsConstructor
+    public enum PENALTY{
+
+        CAUTION("주의"),
+        WARNING("경고"),
+        STOP("정지")
+        ;
+
+        private String statusTitle;
     }
 
 

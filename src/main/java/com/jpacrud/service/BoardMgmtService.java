@@ -1,12 +1,9 @@
 package com.jpacrud.service;
 
 import com.jpacrud.domain.Board;
-import com.jpacrud.domain.BoardReply;
 import com.jpacrud.dto.BoardDto;
-import com.jpacrud.dto.BoardReplyDto;
 import com.jpacrud.dto.request.BoardListRequestDto;
 import com.jpacrud.dto.response.BoardListResponseDto;
-import com.jpacrud.repository.BoardReplyRepository;
 import com.jpacrud.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -23,7 +20,6 @@ import java.util.NoSuchElementException;
 public class BoardMgmtService {
 
     private final BoardRepository boardRepository;
-    private final BoardReplyRepository boardReplyRepository;
 
 
 
@@ -87,19 +83,7 @@ public class BoardMgmtService {
      * @return
      */
 
-    @Transactional
-    public Long createBoardReply(BoardReplyDto boardreplyDto){
 
-
-        Board board = boardRepository.findById(boardreplyDto.getBoardId()).orElseThrow(() -> new NoSuchElementException("CategoryId not found"));
-
-        boardreplyDto.setBoard(board);
-
-        BoardReply boardReply = new BoardReply();
-        boardReply.create(boardreplyDto);
-
-        return boardReplyRepository.save(boardReply).getBoardReplyId();
-    }
 
     /**
      * 카테고리별 게시글 리스트 조회

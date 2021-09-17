@@ -7,7 +7,6 @@ import lombok.Getter;
 
 
 public enum BoardEnums {
-
     ;
 
     @Getter
@@ -22,31 +21,7 @@ public enum BoardEnums {
 
         private int statusCode;
         private String statusTitle;
-
-
     }
 
-    @Getter
-    @AllArgsConstructor
-    public enum BoardCategory implements EnumMapperType{
 
-        FREE(0, "자유게시판"),
-        NOTICE(1, "공지사항"),
-        QNA(2, "질의응답")
-        ;
-
-        private int statusCode;
-        private String statusTitle;
-
-
-        @Override
-        public int getStatusCode() {
-            return statusCode;
-        }
-
-        @Override
-        public String getStatusTitle() {
-            return statusTitle;
-        }
-    }
 }

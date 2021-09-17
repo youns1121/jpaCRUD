@@ -19,6 +19,6 @@ public abstract class BaseEntity extends BaseDateEntity {
 
     @NotAudited
     @NotNull
-    @Column(name = "del_yn")
+    @Column(name = "del_yn", columnDefinition ="char(1) comment '삭제 여부'")
     private String delYn = "N";
 }

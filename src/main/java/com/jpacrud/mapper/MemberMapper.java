@@ -6,7 +6,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
-// unmappedTargetPolicy = ReportingPolicy.IGNORE : 일치하지 않는 필드 무시
+ //unmappedTargetPolicy = ReportingPolicy.IGNORE : 일치하지 않는 필드 무시
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface MemberMapper {
 
@@ -23,14 +23,15 @@ public interface MemberMapper {
     Member memberDtoToMember(MemberDto memberDto);
 
     MemberDto memberToMemberDto(Member member);
-
-
-
-
-
-
-
-
-
-
 }
+
+
+
+
+
+
+
+
+
+
+

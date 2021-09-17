@@ -2,7 +2,7 @@ package com.jpacrud.controller;
 
 import com.jpacrud.dto.BoardDto;
 
-import com.jpacrud.dto.BoardReplyDto;
+
 import com.jpacrud.dto.request.BoardListRequestDto;
 import com.jpacrud.dto.response.BoardListResponseDto;
 import com.jpacrud.service.BoardMgmtService;
@@ -42,16 +42,6 @@ public class BoardMgmtApiController {
     }
 
 
-    /**
-     * 답글 생성
-     */
-    @ApiOperation(value = "게시판 답글 생성", notes = "게시판의 답글을 생성합니다.")
-    @PostMapping("/createReply/{boardId}") //
-    public ResponseEntity<Long> createBoardReply (@RequestBody BoardReplyDto replyDto){
-
-        return ResponseEntity.ok(boardMgmtService.createBoardReply(replyDto));
-
-    }
 
     @ApiOperation(value = "게시판 삭제", notes = "게시판을 삭제합니다.")
     @PostMapping("/deleteBoard/{boardId}")

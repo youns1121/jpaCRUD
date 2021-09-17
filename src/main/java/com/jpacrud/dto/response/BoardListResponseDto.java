@@ -24,10 +24,7 @@ public class BoardListResponseDto {
     @ApiModelProperty(value = "게시판 수정시간")
     private LocalDateTime modifyDate;
 
-    @ApiModelProperty(value = "게시판 카테고리")
-    private BoardEnums.BoardCategory boardCategory;
-    private int statusCode; // 상태 코드
-    private String statusTitle; // 상태 제목
+
 
 //    @ApiModelProperty(value = "플래그 상태값")
 //    StatusEnums.FlagStatus flagStatus;

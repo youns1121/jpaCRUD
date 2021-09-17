@@ -25,9 +25,8 @@ public class Member extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "seq")
+    @Column(name = "seq", columnDefinition = "BIGINT unsigned comment '회원 시퀀스'")
     private Long seq;
-
 
     @NotNull
     @UniqueElements
@@ -50,19 +49,21 @@ public class Member extends BaseEntity {
     private String phone;
 
     @NotNull
-    @Column(name = "member_warning")
-    private int warning = 0;
+    @Column(name = "member_complain")
+    private int Complain = 0;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "gender")
     private StatusEnums.Gender gender;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "role")
-    private StatusEnums.UserRole userRole;
+//    @OneToMany(mappedBy = "member")
+//    private List<Board> boardList = new ArrayList<>();
+
+//    @OneToMany(mappedBy = "member")
+//    private List<BoardComment> boardCommentList = new ArrayList<>();
 
     @OneToMany(mappedBy = "member")
-    private List<Board> boardList = new ArrayList<>();
+    private List<Subscribe> subscribeList = new ArrayList<>();
 
     @OneToMany(mappedBy = "member")
     private List<Category> categoryList = new ArrayList<>();
@@ -72,7 +73,7 @@ public class Member extends BaseEntity {
 
     /**
      * 회원가입
-     * Default : 일반사용자
+     * 최초 권한 : NONE(권한없음)
      */
     @Builder
     public void createUser(MemberDto memberDto){
@@ -84,7 +85,6 @@ public class Member extends BaseEntity {
         this.email = memberDto.getEmail();
         this.gender = memberDto.getGender();
         this.phone = memberDto.getPhone();
-        this.userRole = memberDto.getUserRole().USER_NONE;
     }
 
     /**
